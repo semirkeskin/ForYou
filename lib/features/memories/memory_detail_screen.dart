@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/models/memory_item.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 
 class MemoryDetailScreen extends StatelessWidget {
@@ -15,7 +16,8 @@ class MemoryDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -70,6 +72,7 @@ class MemoryDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

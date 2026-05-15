@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/models/memory_item.dart';
 import '../../data/services/local_json_service.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import 'memory_detail_screen.dart';
 import 'widgets/memory_card.dart';
@@ -37,13 +38,14 @@ class _MemoriesScreenState extends State<MemoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const PageHeader(
-              title: 'Anılarımız',
-              subtitle: 'Birlikte topladıklarımız.',
-            ),
+      body: CherryBackdrop(
+        child: SafeArea(
+          child: Column(
+            children: [
+              const PageHeader(
+                title: 'Anılarımız',
+                subtitle: 'Birlikte topladıklarımız.',
+              ),
             Expanded(
               child: FutureBuilder<List<MemoryItem>>(
                 future: _future,
@@ -92,6 +94,7 @@ class _MemoriesScreenState extends State<MemoriesScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

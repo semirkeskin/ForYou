@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/models/surprise_box.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/soft_card.dart';
 
@@ -16,7 +17,8 @@ class SurpriseBoxDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: Column(
           children: [
             PageHeader(title: box.title, subtitle: box.subtitle),
@@ -56,6 +58,7 @@ class SurpriseBoxDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

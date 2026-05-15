@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/models/surprise_box.dart';
 import '../../data/services/local_json_service.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import 'surprise_box_detail_screen.dart';
 import 'widgets/surprise_box_card.dart';
@@ -77,7 +78,8 @@ class _SurpriseBoxesScreenState extends State<SurpriseBoxesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: Column(
           children: [
             const PageHeader(
@@ -128,6 +130,7 @@ class _SurpriseBoxesScreenState extends State<SurpriseBoxesScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

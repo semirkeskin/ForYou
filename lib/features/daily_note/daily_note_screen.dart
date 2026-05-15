@@ -6,6 +6,7 @@ import '../../core/utils/app_date_utils.dart';
 import '../../data/models/daily_note.dart';
 import '../../data/services/local_json_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/soft_card.dart';
 
@@ -37,36 +38,38 @@ class _DailyNoteScreenState extends State<DailyNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const PageHeader(
-              title: 'Bugünün Notu',
-              subtitle: 'Sana özel, sadece bugüne.',
-            ),
-            Expanded(
-              child: FutureBuilder<DailyNote?>(
-                future: _futureNote,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primary,
-                      ),
-                    );
-                  }
-                  if (snapshot.hasError || snapshot.data == null) {
-                    return _EmptyState(
-                      message: snapshot.hasError
-                          ? 'Bugünün notu yüklenemedi.'
-                          : 'Henüz bir not eklenmedi.',
-                    );
-                  }
-                  return _NoteContent(note: snapshot.data!);
-                },
+      body: CherryBackdrop(
+        child: SafeArea(
+          child: Column(
+            children: [
+              const PageHeader(
+                title: 'Bugünün Notu',
+                subtitle: 'Sana özel, sadece bugüne.',
               ),
-            ),
-          ],
+              Expanded(
+                child: FutureBuilder<DailyNote?>(
+                  future: _futureNote,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
+                      );
+                    }
+                    if (snapshot.hasError || snapshot.data == null) {
+                      return _EmptyState(
+                        message: snapshot.hasError
+                            ? 'Bugünün notu yüklenemedi.'
+                            : 'Henüz bir not eklenmedi.',
+                      );
+                    }
+                    return _NoteContent(note: snapshot.data!);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

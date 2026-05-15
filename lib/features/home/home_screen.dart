@@ -7,6 +7,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../data/models/app_config.dart';
 import '../../data/services/preferences_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/soft_card.dart';
 import '../countdown/countdown_screen.dart';
 import '../daily_note/daily_note_screen.dart';
@@ -227,16 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _defaultPattern() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        image: DecorationImage(
-          image: AssetImage('assets/images/decorations/home_pattern.png'),
-          repeat: ImageRepeat.repeat,
-          alignment: Alignment.topLeft,
-        ),
-      ),
-    );
+    return const CherryBackdrop(child: SizedBox.expand());
   }
 }
 

@@ -7,6 +7,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../data/models/love_reason.dart';
 import '../../data/services/local_json_service.dart';
 import '../../data/services/preferences_service.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/primary_button.dart';
 import 'widgets/love_reason_card.dart';
@@ -82,15 +83,17 @@ class _LoveReasonsScreenState extends State<LoveReasonsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const PageHeader(
-              title: 'Seni Sevme Sebeplerim',
-              subtitle: 'Bir buton, bir sebep.',
-            ),
-            Expanded(child: _buildBody()),
-          ],
+      body: CherryBackdrop(
+        child: SafeArea(
+          child: Column(
+            children: [
+              const PageHeader(
+                title: 'Seni Sevme Sebeplerim',
+                subtitle: 'Bir buton, bir sebep.',
+              ),
+              Expanded(child: _buildBody()),
+            ],
+          ),
         ),
       ),
     );

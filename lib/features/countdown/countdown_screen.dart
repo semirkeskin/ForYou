@@ -8,6 +8,7 @@ import '../../core/utils/app_date_utils.dart';
 import '../../data/models/app_config.dart';
 import '../../data/services/local_json_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/soft_card.dart';
 
@@ -62,12 +63,14 @@ class _CountdownScreenState extends State<CountdownScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const PageHeader(title: 'Geri Sayım'),
-            Expanded(child: _buildBody()),
-          ],
+      body: CherryBackdrop(
+        child: SafeArea(
+          child: Column(
+            children: [
+              const PageHeader(title: 'Geri Sayım'),
+              Expanded(child: _buildBody()),
+            ],
+          ),
         ),
       ),
     );

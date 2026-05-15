@@ -5,6 +5,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../data/models/app_config.dart';
 import '../../data/services/preferences_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/primary_button.dart';
 import '../home/home_screen.dart';
 
@@ -32,7 +33,8 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 560),
@@ -75,6 +77,7 @@ class IntroScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }

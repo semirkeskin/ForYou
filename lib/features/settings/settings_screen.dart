@@ -7,6 +7,7 @@ import '../../data/models/app_config.dart';
 import '../../data/services/background_service.dart';
 import '../../data/services/local_json_service.dart';
 import '../../data/services/preferences_service.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/soft_card.dart';
 import '../intro/intro_screen.dart';
@@ -115,7 +116,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: Column(
           children: [
             const PageHeader(title: 'Ayarlar'),
@@ -221,6 +223,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

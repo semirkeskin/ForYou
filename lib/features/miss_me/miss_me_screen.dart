@@ -5,6 +5,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../data/models/miss_me_message.dart';
 import '../../data/services/local_json_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
+import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/soft_card.dart';
 import 'widgets/miss_me_card.dart';
@@ -49,7 +50,8 @@ class _MissMeScreenState extends State<MissMeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: CherryBackdrop(
+        child: SafeArea(
         child: Column(
           children: [
             const PageHeader(
@@ -109,6 +111,7 @@ class _MissMeScreenState extends State<MissMeScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
