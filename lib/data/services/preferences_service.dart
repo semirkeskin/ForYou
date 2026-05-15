@@ -5,6 +5,7 @@ class PreferencesService {
 
   static const String _kIntroSeen = 'intro_seen';
   static const String _kRecentLoveReasonIds = 'recent_love_reason_ids';
+  static const String _kCustomBackgroundPath = 'custom_background_path';
   static const int _recentWindow = 3;
 
   final SharedPreferences _prefs;
@@ -28,7 +29,6 @@ class PreferencesService {
         .toList(growable: false);
   }
 
-  /// Yeni gosterilen ID'yi pencereye ekler, en eskiyi atar.
   Future<void> pushRecentLoveReason(int id) async {
     final current = recentLoveReasonIds.toList();
     current.remove(id);
@@ -40,5 +40,21 @@ class PreferencesService {
       _kRecentLoveReasonIds,
       current.map((e) => e.toString()).toList(),
     );
+  }
+
+  /// Kullanicinin sectigi ozel arka plan dosyasinin yerel yolu.
+  /// Null ise varsayilan kiraz pattern kullanilir.
+  String? get customBackgroundPath {
+    final raw = _prefs.getString(_kCustomBackgroundPath);
+    if (raw == null || raw.isEmpty) return null;
+    return raw;
+  }
+
+  Future<void> setCustomBackgroundPath(String? path) async {
+    if (path == null || path.isEmpty) {
+      await _prefs.remove(_kCustomBackgroundPath);
+    } else {
+      await _prefs.setString(_kCustomBackgroundPath, path);
+    }
   }
 }

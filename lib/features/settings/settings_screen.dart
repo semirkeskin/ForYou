@@ -4,6 +4,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/models/app_config.dart';
+import '../../data/services/background_service.dart';
 import '../../data/services/local_json_service.dart';
 import '../../data/services/preferences_service.dart';
 import '../../shared/widgets/page_header.dart';
@@ -21,13 +22,18 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   static const LocalJsonService _service = LocalJsonService();
+  late final BackgroundService _backgroundService =
+      BackgroundService(widget.preferences);
 
   AppConfig? _config;
   String _version = '—';
+  String? _customBackgroundPath;
+  bool _pickingBackground = false;
 
   @override
   void initState() {
     super.initState();
+    _customBackgroundPath = widget.preferences.customBackgroundPath;
     _load();
   }
 
@@ -54,12 +60,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ..showSnackBar(
         const SnackBar(content: Text('Tanıtım ekranı sıfırlandı')),
       );
+    if (_config == null) return;
     await Navigator.of(context).pushAndRemoveUntil<void>(
       MaterialPageRoute(
-        builder: (_) => IntroScreen(preferences: widget.preferences),
+        builder: (_) => IntroScreen(
+          preferences: widget.preferences,
+          config: _config!,
+        ),
       ),
       (_) => false,
     );
+  }
+
+  Future<void> _pickBackground() async {
+    if (_pickingBackground) return;
+    setState(() => _pickingBackground = true);
+    try {
+      final path = await _backgroundService.pickAndSetBackground();
+      if (!mounted) return;
+      if (path != null) {
+        setState(() => _customBackgroundPath = path);
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(content: Text('Arka plan güncellendi')),
+          );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text('Resim seçilemedi: $e')),
+        );
+    } finally {
+      if (mounted) setState(() => _pickingBackground = false);
+    }
+  }
+
+  Future<void> _resetBackground() async {
+    await _backgroundService.clearBackground();
+    if (!mounted) return;
+    setState(() => _customBackgroundPath = null);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(content: Text('Varsayılan arka plan')),
+      );
   }
 
   @override
@@ -81,6 +128,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        _buildBackgroundCard(),
+                        const SizedBox(height: 14),
                         SoftCard(
                           onTap: _resetIntro,
                           child: Row(
@@ -172,6 +221,83 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildBackgroundCard() {
+    final hasCustom = _customBackgroundPath != null;
+    return SoftCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.wallpaper_rounded,
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  'Ana sayfa arka planı',
+                  style: AppTextStyles.titleMedium,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            hasCustom
+                ? 'Şu an telefonundan seçtiğin bir resim kullanılıyor.'
+                : 'Varsayılan kiraz dokusu kullanılıyor.',
+            style: AppTextStyles.bodyMuted,
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: _pickingBackground ? null : _pickBackground,
+                  icon: _pickingBackground
+                      ? const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Icon(Icons.photo_library_outlined),
+                  label: Text(hasCustom ? 'Değiştir' : 'Resim seç'),
+                ),
+              ),
+              if (hasCustom) ...[
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _pickingBackground ? null : _resetBackground,
+                    icon: const Icon(Icons.refresh_rounded),
+                    label: const Text('Varsayılana dön'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.mutedText,
+                      side: BorderSide(
+                        color: AppColors.mutedText.withOpacity(0.4),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(28),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ],
       ),
     );
   }

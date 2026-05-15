@@ -2,22 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../data/models/app_config.dart';
 import '../../data/services/preferences_service.dart';
 import '../../shared/widgets/animated_fade_slide.dart';
 import '../../shared/widgets/primary_button.dart';
 import '../home/home_screen.dart';
 
 class IntroScreen extends StatelessWidget {
-  const IntroScreen({super.key, required this.preferences});
+  const IntroScreen({
+    super.key,
+    required this.preferences,
+    required this.config,
+  });
 
   final PreferencesService preferences;
+  final AppConfig config;
 
   Future<void> _onStart(BuildContext context) async {
     await preferences.setIntroSeen(true);
     if (!context.mounted) return;
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
-        builder: (_) => HomeScreen(preferences: preferences),
+        builder: (_) => HomeScreen(preferences: preferences, config: config),
       ),
     );
   }
@@ -48,7 +54,7 @@ class IntroScreen extends StatelessWidget {
                   AnimatedFadeSlide(
                     delay: const Duration(milliseconds: 400),
                     child: Text(
-                      'Çünkü sadece senin için yapıldı.',
+                      'Çünkü sadece ${config.greetingName} için yapıldı.',
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.mutedText,
                         fontStyle: FontStyle.italic,

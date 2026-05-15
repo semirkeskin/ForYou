@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_theme.dart';
+import 'data/models/app_config.dart';
 import 'data/services/preferences_service.dart';
 import 'features/home/home_screen.dart';
 import 'features/intro/intro_screen.dart';
 
 class SanaSakladiklarimApp extends StatelessWidget {
-  const SanaSakladiklarimApp({super.key, required this.preferences});
+  const SanaSakladiklarimApp({
+    super.key,
+    required this.preferences,
+    required this.config,
+  });
 
   final PreferencesService preferences;
+  final AppConfig config;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sana Sakladıklarım',
+      title: config.appName,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: AppTheme.light,
-      // Sistem font olcegi 1.3'u gecince layout dayanmiyor — clamp ediyoruz.
       builder: (context, child) {
         final mq = MediaQuery.of(context);
         return MediaQuery(
@@ -28,8 +33,8 @@ class SanaSakladiklarimApp extends StatelessWidget {
         );
       },
       home: preferences.introSeen
-          ? HomeScreen(preferences: preferences)
-          : IntroScreen(preferences: preferences),
+          ? HomeScreen(preferences: preferences, config: config)
+          : IntroScreen(preferences: preferences, config: config),
     );
   }
 }
