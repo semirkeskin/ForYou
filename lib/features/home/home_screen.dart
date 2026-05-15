@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned.fill(child: _buildBackground()),
           Positioned.fill(
             child: Container(
-              color: AppColors.background.withOpacity(0.45),
+              color: AppColors.background.withOpacity(0.25),
             ),
           ),
           SafeArea(
