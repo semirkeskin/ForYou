@@ -114,11 +114,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Positioned.fill(child: _buildBackground()),
-          Positioned.fill(
-            child: Container(
-              color: AppColors.background.withOpacity(0.25),
+          if (_customBackgroundPath != null)
+            Positioned.fill(
+              child: Container(
+                color: AppColors.background.withOpacity(0.45),
+              ),
             ),
-          ),
           SafeArea(
             child: CustomScrollView(
               slivers: [
@@ -226,11 +227,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _defaultPattern() {
-    return Image.asset(
-      'assets/images/decorations/home_pattern.png',
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stack) =>
-          const ColoredBox(color: AppColors.background),
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.background,
+        image: DecorationImage(
+          image: AssetImage('assets/images/decorations/home_pattern.png'),
+          repeat: ImageRepeat.repeat,
+          alignment: Alignment.topLeft,
+        ),
+      ),
     );
   }
 }

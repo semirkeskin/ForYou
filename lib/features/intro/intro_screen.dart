@@ -54,7 +54,7 @@ class IntroScreen extends StatelessWidget {
                   AnimatedFadeSlide(
                     delay: const Duration(milliseconds: 400),
                     child: Text(
-                      'Çünkü sadece ${config.greetingName} için yapıldı.',
+                      'Çünkü sadece sana özel yapıldı.',
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.mutedText,
                         fontStyle: FontStyle.italic,
