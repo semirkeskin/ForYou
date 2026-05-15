@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Beni özlediğinde oku",
+    "message": "Şu an yanında olamasam da kalbimin en güzel yeri sende.",
+    "audio": null
+  },
+  {
+    "id": 2,
+    "title": "Uyumadan önce oku",
+    "message": "Gözlerini kapatmadan önce bilmeni istiyorum: seni çok seviyorum.",
+    "audio": null
+  },
+  {
+    "id": 3,
+    "title": "Sarılmaya ihtiyacın varsa oku",
+    "message": "Sarılma ihtiyacın olduğunda gözlerini kapat ve beni hayal et. Ben buradayım.",
+    "audio": null
+  }
+]

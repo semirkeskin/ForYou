@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Kötü bir gününde aç",
+    "subtitle": "Bugün biraz ağır geldiyse buradayım.",
+    "message": "Bugün her şey üst üste gelmiş olabilir. Ama sen hâlâ çok değerlisin. Ben senin en yorgun halini de seviyorum.",
+    "requiresConfirmation": true
+  },
+  {
+    "id": 2,
+    "title": "Beni özlediğinde aç",
+    "subtitle": "Biraz yanındaymışım gibi.",
+    "message": "Şu an yanında olamasam da kalbimin en güzel yeri sende.",
+    "requiresConfirmation": false
+  },
+  {
+    "id": 3,
+    "title": "Uyuyamıyorsan aç",
+    "subtitle": "Gözlerini kapatmadan önce bir nefes.",
+    "message": "Gözlerini kapat. Şu an benim seni düşündüğümü düşün. Bu düşünce seni uykuya götürsün.",
+    "requiresConfirmation": false
+  }
+]

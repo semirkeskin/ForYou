@@ -1,0 +1,43 @@
+name: sana_sakladiklarim
+description: Sana ozel, offline calisan dijital hediye uygulamasi.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.0
+  google_fonts: ^6.2.0
+  package_info_plus: ^8.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.0
+  flutter_native_splash: ^2.4.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/
+    - assets/images/memories/
+    - assets/audio/
+
+flutter_native_splash:
+  color: "#FFF7F2"
+  image: assets/branding/app_icon.png
+  android_12:
+    color: "#FFF7F2"
+    image: assets/branding/app_icon.png
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/branding/app_icon.png
+  min_sdk_android: 24

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "İlk kahvemiz",
+    "date": "2025-10-12",
+    "description": "O gün sen fark etmeden sana uzun uzun bakmıştım.",
+    "image": "assets/images/memories/memory_01.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Yağmurlu akşam",
+    "date": "2025-11-04",
+    "description": "Şemsiyemiz yoktu ama umurumuzda değildi.",
+    "image": "assets/images/memories/memory_02.jpg"
+  }
+]
