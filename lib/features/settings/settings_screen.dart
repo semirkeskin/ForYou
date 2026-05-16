@@ -29,12 +29,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   AppConfig? _config;
   String _version = '—';
   String? _customBackgroundPath;
+  DateTime? _relationshipStart;
   bool _pickingBackground = false;
 
   @override
   void initState() {
     super.initState();
     _customBackgroundPath = widget.preferences.customBackgroundPath;
+    _relationshipStart = widget.preferences.relationshipStartDate;
     _load();
   }
 
@@ -110,6 +112,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
   }
 
+  Future<void> _pickRelationshipDate() async {
+    final initial = _relationshipStart ?? DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: DateTime(1990),
+      lastDate: DateTime.now(),
+      helpText: 'İlişki başlangıç tarihi',
+    );
+    if (picked == null || !mounted) return;
+    await widget.preferences.setRelationshipStartDate(picked);
+    if (!mounted) return;
+    setState(() => _relationshipStart = picked);
+  }
+
+  Future<void> _clearRelationshipDate() async {
+    await widget.preferences.setRelationshipStartDate(null);
+    if (!mounted) return;
+    setState(() => _relationshipStart = null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +152,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         _buildBackgroundCard(),
+                        const SizedBox(height: 14),
+                        _buildRelationshipCard(),
                         const SizedBox(height: 14),
                         SoftCard(
                           onTap: _resetIntro,
@@ -269,4 +294,77 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  Widget _buildRelationshipCard() {
+    final start = _relationshipStart;
+    final hasDate = start != null;
+    final daysSince =
+        hasDate ? DateTime.now().difference(start).inDays : null;
+
+    return SoftCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.favorite_outline, color: AppColors.primary),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  'İlişki başlangıcımız',
+                  style: AppTextStyles.titleMedium,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            hasDate
+                ? '${_formatRelationshipDate(start)} — bu yana $daysSince gün 🤍'
+                : 'Tarihimizi belirle, ana sayfada günleri sayalım.',
+            style: AppTextStyles.bodyMuted,
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: _pickRelationshipDate,
+                  icon: const Icon(Icons.calendar_today_outlined),
+                  label: Text(hasDate ? 'Tarihi değiştir' : 'Tarih seç'),
+                ),
+              ),
+              if (hasDate) ...[
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _clearRelationshipDate,
+                    icon: const Icon(Icons.close_rounded),
+                    label: const Text('Sıfırla'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.mutedText,
+                      side: BorderSide(
+                        color: AppColors.mutedText.withOpacity(0.4),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(28),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatRelationshipDate(DateTime d) {
+    String pad(int v) => v.toString().padLeft(2, '0');
+    return '${d.year}-${pad(d.month)}-${pad(d.day)}';
+  }
 }

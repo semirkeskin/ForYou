@@ -9,6 +9,7 @@ class PreferencesService {
   static const String _kRecentLoveReasonIds = 'recent_love_reason_ids';
   static const String _kCustomBackgroundPath = 'custom_background_path';
   static const String _kCountdownEvents = 'countdown_events';
+  static const String _kRelationshipStart = 'relationship_start_date';
   static const int _recentWindow = 3;
 
   final SharedPreferences _prefs;
@@ -92,5 +93,20 @@ class PreferencesService {
     final current =
         countdownEvents.where((e) => e.id != id).toList(growable: false);
     await saveCountdownEvents(current);
+  }
+
+  /// Iliski baslangic tarihi — ana sayfada 'X gun' sayaci icin.
+  DateTime? get relationshipStartDate {
+    final raw = _prefs.getString(_kRelationshipStart);
+    if (raw == null || raw.isEmpty) return null;
+    return DateTime.tryParse(raw);
+  }
+
+  Future<void> setRelationshipStartDate(DateTime? date) async {
+    if (date == null) {
+      await _prefs.remove(_kRelationshipStart);
+    } else {
+      await _prefs.setString(_kRelationshipStart, date.toIso8601String());
+    }
   }
 }

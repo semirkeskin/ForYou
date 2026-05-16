@@ -16,6 +16,8 @@ dependencies:
   package_info_plus: ^8.0.0
   image_picker: ^1.1.0
   path_provider: ^2.1.4
+  url_launcher: ^6.3.0
+  just_audio: ^0.9.40
 
 dev_dependencies:
   flutter_test:

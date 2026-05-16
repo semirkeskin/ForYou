@@ -7,7 +7,9 @@ import '../models/app_config.dart';
 import '../models/daily_note.dart';
 import '../models/love_reason.dart';
 import '../models/memory_item.dart';
+import '../models/song_item.dart';
 import '../models/surprise_box.dart';
+import '../models/voice_message.dart';
 
 class LocalJsonService {
   const LocalJsonService();
@@ -32,6 +34,14 @@ class LocalJsonService {
 
   Future<List<SurpriseBox>> loadSurpriseBoxes() async {
     return _loadList(AssetPaths.surpriseBoxes, SurpriseBox.fromJson);
+  }
+
+  Future<List<SongItem>> loadSongs() async {
+    return _loadList(AssetPaths.songs, SongItem.fromJson);
+  }
+
+  Future<List<VoiceMessage>> loadVoiceMessages() async {
+    return _loadList(AssetPaths.voiceMessages, VoiceMessage.fromJson);
   }
 
   Future<String> _loadString(String path) async {

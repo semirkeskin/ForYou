@@ -17,9 +17,10 @@ import '../daily_note/daily_note_screen.dart';
 import '../love_reasons/love_reasons_screen.dart';
 import '../memories/memories_screen.dart';
 import '../settings/settings_screen.dart';
+import '../songs/songs_screen.dart';
 import '../surprise_boxes/surprise_boxes_screen.dart';
+import '../voice_messages/voice_messages_screen.dart';
 
-/// Hosgeldin altinda gun bazli donen kisa cumleler.
 const List<String> _kRotatingGreetings = [
   'Bugün seni bisssürüüüü össledimmm 🍒',
   'Seni çoook amaaa çoookkk seviyorumm 🥺',
@@ -45,12 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
   static const LocalJsonService _service = LocalJsonService();
 
   String? _customBackgroundPath;
+  DateTime? _relationshipStart;
   late Future<List<MemoryItem>> _memoriesFuture;
 
   @override
   void initState() {
     super.initState();
     _customBackgroundPath = widget.preferences.customBackgroundPath;
+    _relationshipStart = widget.preferences.relationshipStartDate;
     _memoriesFuture = _service.loadMemories();
   }
 
@@ -63,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) return;
     setState(() {
       _customBackgroundPath = widget.preferences.customBackgroundPath;
+      _relationshipStart = widget.preferences.relationshipStartDate;
     });
   }
 
@@ -116,6 +120,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: 'Sürpriz Kutuları',
         icon: Icons.card_giftcard_outlined,
         onTap: () => _open(context, const SurpriseBoxesScreen()),
+      ),
+      _HomeCardData(
+        title: 'Şarkılarımız',
+        icon: Icons.music_note_outlined,
+        onTap: () => _open(context, const SongsScreen()),
+      ),
+      _HomeCardData(
+        title: 'Sesli Mesajlar',
+        icon: Icons.mic_none_outlined,
+        onTap: () => _open(context, const VoiceMessagesScreen()),
       ),
       _HomeCardData(
         title: 'Geri Sayım',
@@ -203,6 +217,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+                if (_relationshipStart != null)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
+                      child: AnimatedFadeSlide(
+                        delay: const Duration(milliseconds: 160),
+                        child: _RelationshipBanner(
+                          startDate: _relationshipStart!,
+                        ),
+                      ),
+                    ),
+                  ),
                 SliverPadding(
                   padding: const EdgeInsets.all(24),
                   sliver: SliverGrid(
@@ -349,6 +375,64 @@ class _TodaysMemoryHero extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _RelationshipBanner extends StatelessWidget {
+  const _RelationshipBanner({required this.startDate});
+
+  final DateTime startDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final days = DateTime.now().difference(startDate).inDays;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.accent, AppColors.primary],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.shadow,
+            blurRadius: 18,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.favorite_rounded, color: Colors.white, size: 22),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Sevgilim oldun-dan bu yana',
+                  style: AppTextStyles.bodyMuted.copyWith(
+                    color: Colors.white.withOpacity(0.92),
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '$days gün 🤍',
+                  style: AppTextStyles.headlineMedium.copyWith(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
