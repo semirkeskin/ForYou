@@ -36,25 +36,29 @@ class MemoryCard extends StatelessWidget {
                 aspectRatio: 4 / 3,
                 child: _MemoryImage(path: memory.image),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      memory.title,
-                      style: AppTextStyles.titleMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      memory.date,
-                      style: AppTextStyles.bodyMuted.copyWith(fontSize: 13),
-                    ),
-                  ],
+              if (memory.title != null || memory.date != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (memory.title != null)
+                        Text(
+                          memory.title!,
+                          style: AppTextStyles.titleMedium,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      if (memory.title != null && memory.date != null)
+                        const SizedBox(height: 4),
+                      if (memory.date != null)
+                        Text(
+                          memory.date!,
+                          style: AppTextStyles.bodyMuted.copyWith(fontSize: 13),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),

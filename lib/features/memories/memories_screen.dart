@@ -26,10 +26,13 @@ class _MemoriesScreenState extends State<MemoriesScreen> {
     _future = _service.loadMemories();
   }
 
-  void _openDetail(MemoryItem memory) {
+  void _openDetail(List<MemoryItem> memories, int index) {
     Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (_) => MemoryDetailScreen(memory: memory),
+        builder: (_) => MemoryDetailScreen(
+          memories: memories,
+          initialIndex: index,
+        ),
       ),
     );
   }
@@ -85,7 +88,7 @@ class _MemoriesScreenState extends State<MemoriesScreen> {
                       final memory = memories[index];
                       return MemoryCard(
                         memory: memory,
-                        onTap: () => _openDetail(memory),
+                        onTap: () => _openDetail(memories, index),
                       );
                     },
                   );
