@@ -44,14 +44,14 @@ void main() {
     test('gecerli JSON ile alanlari parse eder', () async {
       mockAsset(
         'assets/data/app_config.json',
-        '{"appName":"X","greetingName":"Y","countdownTitle":"Z",'
-            '"targetDate":"2026-06-20T18:00:00"}',
+        '{"appName":"X","greetingName":"Y",'
+            '"secretWord":"Kiraz","secretMeaning":"seni seviyorum"}',
       );
       final config = await service.loadAppConfig();
       expect(config.appName, 'X');
       expect(config.greetingName, 'Y');
-      expect(config.countdownTitle, 'Z');
-      expect(config.targetDate, DateTime.parse('2026-06-20T18:00:00'));
+      expect(config.secretWord, 'Kiraz');
+      expect(config.secretMeaning, 'seni seviyorum');
     });
 
     test('bozuk JSON FormatException firlatir', () async {
@@ -79,24 +79,27 @@ void main() {
     });
   });
 
-  group('LocalJsonService.loadMissMeMessages', () {
-    test('audio alani null olabilir ve messages parse edilir', () async {
+  group('LocalJsonService.loadSurpriseBoxes', () {
+    test('messages listesi parse edilir', () async {
       mockAsset(
-        'assets/data/miss_me_messages.json',
-        '[{"id":1,"title":"t","messages":["a","b"],"audio":null}]',
+        'assets/data/surprise_boxes.json',
+        '[{"id":1,"title":"t","subtitle":"s","messages":["a","b"],'
+            '"requiresConfirmation":false}]',
       );
-      final list = await service.loadMissMeMessages();
-      expect(list.first.audio, isNull);
+      final list = await service.loadSurpriseBoxes();
       expect(list.first.messages, ['a', 'b']);
+      expect(list.first.requiresConfirmation, isFalse);
     });
 
     test('eski message alanı (string) geriye uyumlu', () async {
       mockAsset(
-        'assets/data/miss_me_messages.json',
-        '[{"id":1,"title":"t","message":"tek mesaj","audio":null}]',
+        'assets/data/surprise_boxes.json',
+        '[{"id":1,"title":"t","subtitle":"s","message":"tek mesaj",'
+            '"requiresConfirmation":true}]',
       );
-      final list = await service.loadMissMeMessages();
+      final list = await service.loadSurpriseBoxes();
       expect(list.first.messages, ['tek mesaj']);
+      expect(list.first.requiresConfirmation, isTrue);
     });
   });
 }

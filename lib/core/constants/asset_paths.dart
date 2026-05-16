@@ -8,5 +8,4 @@ class AssetPaths {
   static const String loveReasons = '${dataDir}love_reasons.json';
   static const String memories = '${dataDir}memories.json';
   static const String surpriseBoxes = '${dataDir}surprise_boxes.json';
-  static const String missMeMessages = '${dataDir}miss_me_messages.json';
 }

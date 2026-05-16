@@ -112,8 +112,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final config = _config;
-
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CherryBackdrop(
@@ -154,40 +152,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 14),
-                        if (config != null)
-                          SoftCard(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Geri sayım',
-                                  style: AppTextStyles.titleMedium,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  config.countdownTitle,
-                                  style: AppTextStyles.bodyMedium,
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  _formatDate(config.targetDate),
-                                  style: AppTextStyles.bodyMedium.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  'Değiştirmek için uygulama dosyalarındaki '
-                                  'app_config.json düzenlenmelidir.',
-                                  style: AppTextStyles.bodyMuted.copyWith(
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                         const SizedBox(height: 14),
                         SoftCard(
                           child: Row(
@@ -305,9 +269,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  String _formatDate(DateTime date) {
-    String pad(int v) => v.toString().padLeft(2, '0');
-    return '${date.year}-${pad(date.month)}-${pad(date.day)} '
-        '${pad(date.hour)}:${pad(date.minute)}';
-  }
 }

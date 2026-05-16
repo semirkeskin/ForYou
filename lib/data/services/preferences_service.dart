@@ -1,11 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/countdown_event.dart';
+
 class PreferencesService {
   PreferencesService(this._prefs);
 
   static const String _kIntroSeen = 'intro_seen';
   static const String _kRecentLoveReasonIds = 'recent_love_reason_ids';
   static const String _kCustomBackgroundPath = 'custom_background_path';
+  static const String _kCountdownEvents = 'countdown_events';
   static const int _recentWindow = 3;
 
   final SharedPreferences _prefs;
@@ -56,5 +59,38 @@ class PreferencesService {
     } else {
       await _prefs.setString(_kCustomBackgroundPath, path);
     }
+  }
+
+  /// Kullanicinin ekledigi geri sayim eventleri.
+  List<CountdownEvent> get countdownEvents {
+    return CountdownEvent.decodeList(_prefs.getString(_kCountdownEvents));
+  }
+
+  Future<void> saveCountdownEvents(List<CountdownEvent> events) async {
+    if (events.isEmpty) {
+      await _prefs.remove(_kCountdownEvents);
+    } else {
+      await _prefs.setString(
+        _kCountdownEvents,
+        CountdownEvent.encodeList(events),
+      );
+    }
+  }
+
+  Future<void> upsertCountdownEvent(CountdownEvent event) async {
+    final current = countdownEvents.toList();
+    final idx = current.indexWhere((e) => e.id == event.id);
+    if (idx >= 0) {
+      current[idx] = event;
+    } else {
+      current.add(event);
+    }
+    await saveCountdownEvents(current);
+  }
+
+  Future<void> removeCountdownEvent(String id) async {
+    final current =
+        countdownEvents.where((e) => e.id != id).toList(growable: false);
+    await saveCountdownEvents(current);
   }
 }

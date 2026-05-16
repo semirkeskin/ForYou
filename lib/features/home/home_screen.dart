@@ -16,10 +16,16 @@ import '../countdown/countdown_screen.dart';
 import '../daily_note/daily_note_screen.dart';
 import '../love_reasons/love_reasons_screen.dart';
 import '../memories/memories_screen.dart';
-import '../memories/memory_detail_screen.dart';
-import '../miss_me/miss_me_screen.dart';
 import '../settings/settings_screen.dart';
 import '../surprise_boxes/surprise_boxes_screen.dart';
+
+/// Hosgeldin altinda gun bazli donen kisa cumleler.
+const List<String> _kRotatingGreetings = [
+  'Bugün seni bisssürüüüü össledimmm 🍒',
+  'Seni çoook amaaa çoookkk seviyorumm 🥺',
+  'Bugün yine yeniden aşık oluyorum sana 🤍',
+  'Güzelimm ✨',
+];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -66,17 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _openTodaysMemory(List<MemoryItem> memories, int index) {
-    Navigator.of(context).push<void>(
-      MaterialPageRoute(
-        builder: (_) => MemoryDetailScreen(
-          memories: memories,
-          initialIndex: index,
-        ),
-      ),
-    );
-  }
-
   void _whisperSecret(BuildContext context) {
     final word = widget.config.secretWord;
     final meaning = widget.config.secretMeaning;
@@ -89,6 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
           duration: const Duration(seconds: 3),
         ),
       );
+  }
+
+  String _todaysGreeting() {
+    final idx = AppDateUtils.dailyIndex(_kRotatingGreetings.length);
+    return _kRotatingGreetings[idx];
   }
 
   @override
@@ -118,14 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () => _open(context, const SurpriseBoxesScreen()),
       ),
       _HomeCardData(
-        title: 'Beni Özlediğinde',
-        icon: Icons.mail_outline,
-        onTap: () => _open(context, const MissMeScreen()),
-      ),
-      _HomeCardData(
         title: 'Geri Sayım',
         icon: Icons.timer_outlined,
-        onTap: () => _open(context, const CountdownScreen()),
+        onTap: () => _open(
+          context,
+          CountdownScreen(preferences: widget.preferences),
+        ),
       ),
     ];
 
@@ -162,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GestureDetector(
                                   onTap: () => _whisperSecret(context),
                                   child: Text(
-                                    'Bugün de seni düşündüm. 🍒',
+                                    _todaysGreeting(),
                                     style: AppTextStyles.bodyMuted,
                                   ),
                                 ),
@@ -199,10 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           final index =
                               AppDateUtils.dailyIndex(memories.length);
                           final memory = memories[index];
-                          return _TodaysMemoryHero(
-                            memory: memory,
-                            onTap: () => _openTodaysMemory(memories, index),
-                          );
+                          return _TodaysMemoryHero(memory: memory);
                         },
                       ),
                     ),
@@ -288,106 +283,73 @@ class _HomeCardData {
 }
 
 class _TodaysMemoryHero extends StatelessWidget {
-  const _TodaysMemoryHero({required this.memory, required this.onTap});
+  const _TodaysMemoryHero({required this.memory});
 
   final MemoryItem memory;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
+    return ClipRRect(
       borderRadius: BorderRadius.circular(28),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: SizedBox(
-          height: 280,
-          width: double.infinity,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset(
-                memory.image,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stack) => Container(
-                  color: AppColors.accent.withOpacity(0.4),
-                  child: const Center(
-                    child: Icon(
-                      Icons.image_outlined,
-                      size: 48,
-                      color: AppColors.primary,
-                    ),
+      child: SizedBox(
+        height: 280,
+        width: double.infinity,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              memory.image,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stack) => Container(
+                color: AppColors.accent.withOpacity(0.4),
+                child: const Center(
+                  child: Icon(
+                    Icons.image_outlined,
+                    size: 48,
+                    color: AppColors.primary,
                   ),
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.transparent,
-                      Color(0xCC000000),
-                    ],
-                    stops: [0.0, 0.4, 1.0],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 18,
-                right: 18,
-                bottom: 18,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.85),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        'Bugünün Anısı',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      _heroCaption(memory),
-                      style: AppTextStyles.headlineMedium.copyWith(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    Color(0xCC000000),
                   ],
+                  stops: [0.0, 0.4, 1.0],
                 ),
               ),
-            ],
-          ),
+            ),
+            Positioned(
+              left: 18,
+              bottom: 18,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.85),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  'Bugünün Anısı',
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  String _heroCaption(MemoryItem memory) {
-    if (memory.title != null && memory.title!.isNotEmpty) {
-      return memory.title!;
-    }
-    if (memory.description != null && memory.description!.isNotEmpty) {
-      return memory.description!;
-    }
-    return 'Bu günü hatırlıyor musun?';
   }
 }

@@ -7,7 +7,6 @@ import '../models/app_config.dart';
 import '../models/daily_note.dart';
 import '../models/love_reason.dart';
 import '../models/memory_item.dart';
-import '../models/miss_me_message.dart';
 import '../models/surprise_box.dart';
 
 class LocalJsonService {
@@ -33,10 +32,6 @@ class LocalJsonService {
 
   Future<List<SurpriseBox>> loadSurpriseBoxes() async {
     return _loadList(AssetPaths.surpriseBoxes, SurpriseBox.fromJson);
-  }
-
-  Future<List<MissMeMessage>> loadMissMeMessages() async {
-    return _loadList(AssetPaths.missMeMessages, MissMeMessage.fromJson);
   }
 
   Future<String> _loadString(String path) async {

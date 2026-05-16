@@ -27,11 +27,9 @@ Future<AppConfig> _loadConfigSafely() async {
   try {
     return await const LocalJsonService().loadAppConfig();
   } catch (_) {
-    return AppConfig(
+    return const AppConfig(
       appName: 'Sana Sakladıklarım',
       greetingName: 'Sevgilim',
-      countdownTitle: 'Bir sonraki buluşmamıza',
-      targetDate: DateTime.now().add(const Duration(days: 30)),
     );
   }
 }
