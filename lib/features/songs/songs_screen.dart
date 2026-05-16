@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,8 +44,12 @@ class _SongsScreenState extends State<SongsScreen> {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withOpacity(0.35),
       isScrollControlled: true,
-      builder: (_) => _SongDetailSheet(song: song, onOpenLink: _openLink),
+      builder: (_) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: _SongDetailSheet(song: song, onOpenLink: _openLink),
+      ),
     );
   }
 
@@ -200,6 +206,32 @@ class _SongTile extends StatelessWidget {
   }
 }
 
+class _SoftCloseButton extends StatelessWidget {
+  const _SoftCloseButton({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.background,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: const Padding(
+          padding: EdgeInsets.all(7),
+          child: Icon(
+            Icons.close_rounded,
+            color: AppColors.mutedText,
+            size: 18,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SongDetailSheet extends StatelessWidget {
   const _SongDetailSheet({required this.song, required this.onOpenLink});
 
@@ -219,44 +251,63 @@ class _SongDetailSheet extends StatelessWidget {
           child: AnimatedFadeSlide(
             duration: const Duration(milliseconds: 450),
             child: SoftCard(
-              padding: const EdgeInsets.fromLTRB(26, 24, 26, 26),
+              padding: const EdgeInsets.fromLTRB(26, 22, 18, 26),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              song.title,
-                              style: AppTextStyles.headlineMedium
-                                  .copyWith(fontSize: 20),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              song.artist,
-                              style: AppTextStyles.bodyMuted,
-                            ),
-                          ],
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: AppColors.accent.withOpacity(0.45),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(
+                          Icons.music_note_rounded,
+                          color: AppColors.primary,
+                          size: 22,
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.close_rounded),
-                        color: AppColors.mutedText,
-                        onPressed: () => Navigator.of(context).maybePop(),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                song.title,
+                                style: AppTextStyles.headlineMedium
+                                    .copyWith(fontSize: 19),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                song.artist,
+                                style: AppTextStyles.bodyMuted,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      _SoftCloseButton(
+                        onTap: () => Navigator.of(context).maybePop(),
                       ),
                     ],
                   ),
                   if (hasReason) ...[
-                    const SizedBox(height: 14),
-                    Text(
-                      song.reason!,
-                      style: AppTextStyles.bodyLarge.copyWith(
-                        fontSize: 16,
-                        height: 1.55,
+                    const SizedBox(height: 18),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Text(
+                        song.reason!,
+                        style: AppTextStyles.bodyLarge.copyWith(
+                          fontSize: 16,
+                          height: 1.7,
+                        ),
                       ),
                     ),
                   ],

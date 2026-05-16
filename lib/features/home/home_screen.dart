@@ -7,6 +7,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/app_date_utils.dart';
 import '../../core/utils/responsive.dart';
 import '../../data/models/app_config.dart';
+import '../../data/models/daily_note.dart';
 import '../../data/models/memory_item.dart';
 import '../../data/services/local_json_service.dart';
 import '../../data/services/preferences_service.dart';
@@ -14,7 +15,6 @@ import '../../shared/widgets/animated_fade_slide.dart';
 import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/soft_card.dart';
 import '../countdown/countdown_screen.dart';
-import '../daily_note/daily_note_screen.dart';
 import '../love_reasons/love_reasons_screen.dart';
 import '../memories/memories_screen.dart';
 import '../settings/settings_screen.dart';
@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? _customBackgroundPath;
   DateTime? _relationshipStart;
   late Future<List<MemoryItem>> _memoriesFuture;
+  late Future<List<DailyNote>> _dailyNotesFuture;
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _customBackgroundPath = widget.preferences.customBackgroundPath;
     _relationshipStart = widget.preferences.relationshipStartDate;
     _memoriesFuture = _service.loadMemories();
+    _dailyNotesFuture = _service.loadDailyNotes();
   }
 
   Future<void> _openSettings() async {
@@ -102,14 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final hPad = Responsive.horizontalPadding(context);
     final maxW = Responsive.contentMaxWidth(context);
     final textScale = Responsive.textScale(context);
-    final heroHeight = Responsive.heroHeight(context);
 
     final cards = <_HomeCardData>[
-      _HomeCardData(
-        title: 'Bugünün Notu',
-        icon: Icons.wb_sunny_outlined,
-        onTap: () => _open(context, const DailyNoteScreen()),
-      ),
       _HomeCardData(
         title: 'Seni Sevme Sebeplerim',
         icon: Icons.favorite_outline,
@@ -229,10 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               final index =
                                   AppDateUtils.dailyIndex(memories.length);
                               final memory = memories[index];
-                              return _TodaysMemoryHero(
-                                memory: memory,
-                                height: heroHeight,
-                              );
+                              return _TodaysMemoryHero(memory: memory);
                             },
                           ),
                         ),
@@ -243,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
                           child: AnimatedFadeSlide(
-                            delay: const Duration(milliseconds: 160),
+                            delay: const Duration(milliseconds: 140),
                             child: _RelationshipBanner(
                               startDate: _relationshipStart!,
                               textScale: textScale,
@@ -251,24 +244,52 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(hPad, 14, hPad, 0),
+                        child: AnimatedFadeSlide(
+                          delay: const Duration(milliseconds: 180),
+                          child: FutureBuilder<List<DailyNote>>(
+                            future: _dailyNotesFuture,
+                            builder: (context, snapshot) {
+                              final notes = snapshot.data;
+                              if (notes == null || notes.isEmpty) {
+                                return const SizedBox.shrink();
+                              }
+                              final i =
+                                  AppDateUtils.dailyIndex(notes.length);
+                              return _TodaysNoteInline(
+                                note: notes[i],
+                                textScale: textScale,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                     SliverPadding(
-                      padding: EdgeInsets.all(hPad),
+                      padding: EdgeInsets.fromLTRB(hPad, 18, hPad, hPad),
                       sliver: SliverGrid(
                         gridDelegate:
                             SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: isTablet ? 320 : 280,
-                          mainAxisSpacing: isTablet ? 20 : 16,
-                          crossAxisSpacing: isTablet ? 20 : 16,
-                          childAspectRatio: 1.1,
+                          maxCrossAxisExtent: isTablet ? 260 : 220,
+                          mainAxisSpacing: isTablet ? 16 : 14,
+                          crossAxisSpacing: isTablet ? 16 : 14,
+                          childAspectRatio: 1.25,
                         ),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
                             final data = cards[index];
                             return AnimatedFadeSlide(
-                              delay: Duration(milliseconds: 120 * index),
+                              delay: Duration(milliseconds: 100 * index),
                               child: SoftCard(
                                 onTap: data.onTap,
-                                padding: EdgeInsets.all(isTablet ? 24 : 20),
+                                padding: EdgeInsets.fromLTRB(
+                                  isTablet ? 20 : 16,
+                                  isTablet ? 18 : 14,
+                                  isTablet ? 20 : 16,
+                                  isTablet ? 18 : 16,
+                                ),
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -277,14 +298,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Icon(
                                       data.icon,
-                                      size: isTablet ? 38 : 32,
+                                      size: isTablet ? 30 : 26,
                                       color: AppColors.primary,
                                     ),
                                     Text(
                                       data.title,
                                       style: AppTextStyles.titleMedium
                                           .copyWith(
-                                        fontSize: 18 * textScale,
+                                        fontSize: 15.5 * textScale,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ],
@@ -338,73 +360,83 @@ class _HomeCardData {
   final VoidCallback onTap;
 }
 
+/// Hero kart — landscape/portrait responsive.
+/// AspectRatio 16:9; tabletlerde max-height ile sinirlanir.
 class _TodaysMemoryHero extends StatelessWidget {
-  const _TodaysMemoryHero({required this.memory, required this.height});
+  const _TodaysMemoryHero({required this.memory});
 
   final MemoryItem memory;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(28),
-      child: SizedBox(
-        height: height,
-        width: double.infinity,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.asset(
-              memory.image,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stack) => Container(
-                color: AppColors.accent.withOpacity(0.4),
-                child: const Center(
-                  child: Icon(
-                    Icons.image_outlined,
-                    size: 48,
-                    color: AppColors.primary,
+    final isTablet = Responsive.isTablet(context);
+    final isLandscape = Responsive.isLandscape(context);
+    // Landscape tablet'te ekran cok genis; foto cok yuksek olmasin diye
+    // 21:9 panoramik kullanilir. Portrait/tablet 16:9.
+    final aspect = isTablet && isLandscape ? 21 / 9 : 16 / 9;
+    final maxH = isTablet ? 380.0 : 260.0;
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxH),
+      child: AspectRatio(
+        aspectRatio: aspect,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                memory.image,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stack) => Container(
+                  color: AppColors.accent.withOpacity(0.4),
+                  child: const Center(
+                    child: Icon(
+                      Icons.image_outlined,
+                      size: 48,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.transparent,
-                    Color(0xCC000000),
-                  ],
-                  stops: [0.0, 0.4, 1.0],
-                ),
-              ),
-            ),
-            Positioned(
-              left: 18,
-              bottom: 18,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.85),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  'Bugünün Anısı',
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.transparent,
+                      Color(0xCC000000),
+                    ],
+                    stops: [0.0, 0.4, 1.0],
                   ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                left: 18,
+                bottom: 18,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.85),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    'Bugünün Anısı',
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -465,6 +497,68 @@ class _RelationshipBanner extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Bugunun Notu — ana sayfada inline blok.
+class _TodaysNoteInline extends StatelessWidget {
+  const _TodaysNoteInline({required this.note, required this.textScale});
+
+  final DailyNote note;
+  final double textScale;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.88),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: AppColors.accent.withOpacity(0.45),
+          width: 1,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.shadow,
+            blurRadius: 14,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.wb_sunny_outlined,
+                color: AppColors.primary,
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Bugünün Notu',
+                style: AppTextStyles.bodyMuted.copyWith(
+                  color: AppColors.primary,
+                  fontSize: 12 * textScale,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            note.text,
+            style: AppTextStyles.bodyLarge.copyWith(
+              fontSize: 15.5 * textScale,
+              height: 1.55,
             ),
           ),
         ],

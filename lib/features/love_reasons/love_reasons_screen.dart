@@ -10,6 +10,7 @@ import '../../data/services/preferences_service.dart';
 import '../../shared/widgets/cherry_backdrop.dart';
 import '../../shared/widgets/page_header.dart';
 import '../../shared/widgets/primary_button.dart';
+import '../../shared/widgets/soft_card.dart';
 import 'widgets/love_reason_card.dart';
 
 class LoveReasonsScreen extends StatefulWidget {
@@ -154,6 +155,7 @@ class _LoveReasonsScreenState extends State<LoveReasonsScreen> {
                         : LoveReasonCard(
                             key: ValueKey('reason-${_current!.id}'),
                             text: _current!.text,
+                            onShuffle: _pickNewReason,
                           ),
                   ),
                 ),
@@ -176,21 +178,32 @@ class _PlaceholderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return SoftCard(
+      padding: const EdgeInsets.fromLTRB(28, 32, 28, 32),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.favorite_border_rounded,
-            color: AppColors.accent,
-            size: 60,
+          Container(
+            width: 84,
+            height: 84,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.accent.withOpacity(0.35),
+            ),
+            child: const Icon(
+              Icons.favorite_border_rounded,
+              color: AppColors.primary,
+              size: 44,
+            ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
           Text(
             'Butona basınca seni neden sevdiğimi söyleyeceğim.',
             textAlign: TextAlign.center,
-            style: AppTextStyles.bodyMuted.copyWith(fontSize: 16),
+            style: AppTextStyles.bodyMedium.copyWith(
+              fontSize: 15.5,
+              height: 1.5,
+            ),
           ),
         ],
       ),

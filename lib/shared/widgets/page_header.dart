@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 
+/// Sayfa basligi — arka plani yari saydam krem, boylece arkadaki kiraz
+/// pattern yazinin uzerine gelmez.
 class PageHeader extends StatelessWidget {
   const PageHeader({
     super.key,
@@ -17,8 +19,9 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 12, 16, 8),
+    return Container(
+      color: AppColors.background.withOpacity(0.92),
+      padding: const EdgeInsets.fromLTRB(8, 14, 16, 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
