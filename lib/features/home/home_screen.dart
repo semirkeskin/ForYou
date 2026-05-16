@@ -580,7 +580,7 @@ class _UpcomingCountdowns extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
+      height: 82,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -620,8 +620,7 @@ class _CountdownChip extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Ink(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
@@ -635,31 +634,36 @@ class _CountdownChip extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: AppTextStyles.bodyMuted.copyWith(
-                  fontSize: 10,
-                  color: AppColors.primary,
-                  letterSpacing: 0.5,
-                  fontWeight: FontWeight.w700,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title.toUpperCase(),
+                  style: AppTextStyles.bodyMuted.copyWith(
+                    fontSize: 10,
+                    color: AppColors.primary,
+                    letterSpacing: 0.6,
+                    fontWeight: FontWeight.w700,
+                    height: 1.1,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 3),
-              Text(
-                daysLabel,
-                style: AppTextStyles.titleMedium.copyWith(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.text,
+                const SizedBox(height: 6),
+                Text(
+                  daysLabel,
+                  style: AppTextStyles.titleMedium.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.text,
+                    height: 1.1,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
