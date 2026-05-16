@@ -2,7 +2,7 @@
     <!-- url_launcher: Spotify/YouTube linki acmak icin -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="sana_sakladiklarim"
+        android:label="Kiraz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

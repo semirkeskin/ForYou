@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/app_date_utils.dart';
+import '../../core/utils/responsive.dart';
 import '../../data/models/app_config.dart';
 import '../../data/models/memory_item.dart';
 import '../../data/services/local_json_service.dart';
@@ -97,6 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+    final hPad = Responsive.horizontalPadding(context);
+    final maxW = Responsive.contentMaxWidth(context);
+    final textScale = Responsive.textScale(context);
+    final heroHeight = Responsive.heroHeight(context);
+
     final cards = <_HomeCardData>[
       _HomeCardData(
         title: 'Bugünün Notu',
@@ -153,122 +160,145 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           SafeArea(
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 24, 16, 8),
-                    child: AnimatedFadeSlide(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Hoş geldin ${widget.config.greetingName} 🌙',
-                                  style: AppTextStyles.headlineLarge,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: maxW),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(hPad, 24, hPad - 8, 8),
+                        child: AnimatedFadeSlide(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hoş geldin ${widget.config.greetingName} 🌙',
+                                      style: AppTextStyles.headlineLarge
+                                          .copyWith(
+                                        fontSize: 28 * textScale,
+                                      ),
+                                    ),
+                                    SizedBox(height: isTablet ? 8 : 6),
+                                    GestureDetector(
+                                      onTap: () => _whisperSecret(context),
+                                      child: Text(
+                                        _todaysGreeting(),
+                                        style: AppTextStyles.bodyMuted
+                                            .copyWith(
+                                          fontSize: 14 * textScale,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(height: 6),
-                                GestureDetector(
-                                  onTap: () => _whisperSecret(context),
-                                  child: Text(
-                                    _todaysGreeting(),
-                                    style: AppTextStyles.bodyMuted,
-                                  ),
+                              ),
+                              Semantics(
+                                label: 'Ayarlar',
+                                button: true,
+                                child: IconButton(
+                                  iconSize: isTablet ? 28 : 24,
+                                  icon: const Icon(Icons.settings_outlined),
+                                  color: AppColors.mutedText,
+                                  tooltip: 'Ayarlar',
+                                  onPressed: _openSettings,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Semantics(
-                            label: 'Ayarlar',
-                            button: true,
-                            child: IconButton(
-                              icon: const Icon(Icons.settings_outlined),
-                              color: AppColors.mutedText,
-                              tooltip: 'Ayarlar',
-                              onPressed: _openSettings,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-                    child: AnimatedFadeSlide(
-                      delay: const Duration(milliseconds: 100),
-                      child: FutureBuilder<List<MemoryItem>>(
-                        future: _memoriesFuture,
-                        builder: (context, snapshot) {
-                          final memories = snapshot.data;
-                          if (memories == null || memories.isEmpty) {
-                            return const SizedBox.shrink();
-                          }
-                          final index =
-                              AppDateUtils.dailyIndex(memories.length);
-                          final memory = memories[index];
-                          return _TodaysMemoryHero(memory: memory);
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                if (_relationshipStart != null)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-                      child: AnimatedFadeSlide(
-                        delay: const Duration(milliseconds: 160),
-                        child: _RelationshipBanner(
-                          startDate: _relationshipStart!,
                         ),
                       ),
                     ),
-                  ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(24),
-                  sliver: SliverGrid(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 280,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      childAspectRatio: 1.1,
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(hPad, 8, hPad, 8),
+                        child: AnimatedFadeSlide(
+                          delay: const Duration(milliseconds: 100),
+                          child: FutureBuilder<List<MemoryItem>>(
+                            future: _memoriesFuture,
+                            builder: (context, snapshot) {
+                              final memories = snapshot.data;
+                              if (memories == null || memories.isEmpty) {
+                                return const SizedBox.shrink();
+                              }
+                              final index =
+                                  AppDateUtils.dailyIndex(memories.length);
+                              final memory = memories[index];
+                              return _TodaysMemoryHero(
+                                memory: memory,
+                                height: heroHeight,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final data = cards[index];
-                        return AnimatedFadeSlide(
-                          delay: Duration(milliseconds: 120 * index),
-                          child: SoftCard(
-                            onTap: data.onTap,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Icon(
-                                  data.icon,
-                                  size: 32,
-                                  color: AppColors.primary,
-                                ),
-                                Text(
-                                  data.title,
-                                  style: AppTextStyles.titleMedium,
-                                ),
-                              ],
+                    if (_relationshipStart != null)
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+                          child: AnimatedFadeSlide(
+                            delay: const Duration(milliseconds: 160),
+                            child: _RelationshipBanner(
+                              startDate: _relationshipStart!,
+                              textScale: textScale,
                             ),
                           ),
-                        );
-                      },
-                      childCount: cards.length,
+                        ),
+                      ),
+                    SliverPadding(
+                      padding: EdgeInsets.all(hPad),
+                      sliver: SliverGrid(
+                        gridDelegate:
+                            SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: isTablet ? 320 : 280,
+                          mainAxisSpacing: isTablet ? 20 : 16,
+                          crossAxisSpacing: isTablet ? 20 : 16,
+                          childAspectRatio: 1.1,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final data = cards[index];
+                            return AnimatedFadeSlide(
+                              delay: Duration(milliseconds: 120 * index),
+                              child: SoftCard(
+                                onTap: data.onTap,
+                                padding: EdgeInsets.all(isTablet ? 24 : 20),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(
+                                      data.icon,
+                                      size: isTablet ? 38 : 32,
+                                      color: AppColors.primary,
+                                    ),
+                                    Text(
+                                      data.title,
+                                      style: AppTextStyles.titleMedium
+                                          .copyWith(
+                                        fontSize: 18 * textScale,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: cards.length,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -309,16 +339,17 @@ class _HomeCardData {
 }
 
 class _TodaysMemoryHero extends StatelessWidget {
-  const _TodaysMemoryHero({required this.memory});
+  const _TodaysMemoryHero({required this.memory, required this.height});
 
   final MemoryItem memory;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(28),
       child: SizedBox(
-        height: 280,
+        height: height,
         width: double.infinity,
         child: Stack(
           fit: StackFit.expand,
@@ -356,8 +387,8 @@ class _TodaysMemoryHero extends StatelessWidget {
               bottom: 18,
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
+                  horizontal: 12,
+                  vertical: 5,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.85),
@@ -381,9 +412,13 @@ class _TodaysMemoryHero extends StatelessWidget {
 }
 
 class _RelationshipBanner extends StatelessWidget {
-  const _RelationshipBanner({required this.startDate});
+  const _RelationshipBanner({
+    required this.startDate,
+    required this.textScale,
+  });
 
   final DateTime startDate;
+  final double textScale;
 
   @override
   Widget build(BuildContext context) {
@@ -417,7 +452,7 @@ class _RelationshipBanner extends StatelessWidget {
                   'Sevgilim oldun-dan bu yana',
                   style: AppTextStyles.bodyMuted.copyWith(
                     color: Colors.white.withOpacity(0.92),
-                    fontSize: 12,
+                    fontSize: 12 * textScale,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -425,7 +460,7 @@ class _RelationshipBanner extends StatelessWidget {
                   '$days gün 🤍',
                   style: AppTextStyles.headlineMedium.copyWith(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 18 * textScale,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
