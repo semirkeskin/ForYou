@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -360,8 +361,9 @@ class _HomeCardData {
   final VoidCallback onTap;
 }
 
-/// Hero kart — landscape/portrait responsive.
-/// AspectRatio 16:9; tabletlerde max-height ile sinirlanir.
+/// Hero kart — landscape/portrait responsive + blur backdrop.
+/// Foto BoxFit.contain ile tam gosterilir; arka planda ayni fotonun blur'lu
+/// cover versiyonu zemin olur. Boylece dikey fotolar kirpilmaz.
 class _TodaysMemoryHero extends StatelessWidget {
   const _TodaysMemoryHero({required this.memory});
 
@@ -371,10 +373,11 @@ class _TodaysMemoryHero extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Responsive.isTablet(context);
     final isLandscape = Responsive.isLandscape(context);
-    // Landscape tablet'te ekran cok genis; foto cok yuksek olmasin diye
-    // 21:9 panoramik kullanilir. Portrait/tablet 16:9.
-    final aspect = isTablet && isLandscape ? 21 / 9 : 16 / 9;
-    final maxH = isTablet ? 380.0 : 260.0;
+    // Portrait: 3:2 (dikey fotolarda daha az bos alan, daha az kirpilma)
+    // Tablet landscape: 16:9 (yatayda dengeli)
+    final aspect = isLandscape && isTablet ? 16 / 9 : 3 / 2;
+    final maxH = isTablet ? 420.0 : 320.0;
+    final image = AssetImage(memory.image);
 
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: maxH),
@@ -385,20 +388,34 @@ class _TodaysMemoryHero extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(
-                memory.image,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stack) => Container(
-                  color: AppColors.accent.withOpacity(0.4),
-                  child: const Center(
-                    child: Icon(
-                      Icons.image_outlined,
-                      size: 48,
-                      color: AppColors.primary,
-                    ),
+              // 1) Arka plan: ayni foto blur'lu cover (boslugu doldurur).
+              ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 28, sigmaY: 28),
+                child: Image(
+                  image: image,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stack) => Container(
+                    color: AppColors.accent.withOpacity(0.4),
                   ),
                 ),
               ),
+              // Blur uzerine hafif krem tonlama (canlilik kirpilmasin).
+              Container(
+                color: AppColors.background.withOpacity(0.18),
+              ),
+              // 2) On plan: foto contain — tum foto gorunur, kirpilmaz.
+              Center(
+                child: Image(
+                  image: image,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stack) => const Icon(
+                    Icons.image_outlined,
+                    size: 48,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+              // 3) Altta gradient: kapsulun arkasi daha okunabilir olsun.
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -407,12 +424,13 @@ class _TodaysMemoryHero extends StatelessWidget {
                     colors: [
                       Colors.transparent,
                       Colors.transparent,
-                      Color(0xCC000000),
+                      Color(0x80000000),
                     ],
-                    stops: [0.0, 0.4, 1.0],
+                    stops: [0.0, 0.55, 1.0],
                   ),
                 ),
               ),
+              // 4) "Bugunun Anisi" kapsulu.
               Positioned(
                 left: 18,
                 bottom: 18,
@@ -422,7 +440,7 @@ class _TodaysMemoryHero extends StatelessWidget {
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.85),
+                    color: Colors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
