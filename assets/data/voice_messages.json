@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Sesli Mesaj 1",
+    "audioPath": "assets/audio/voice_01.aac",
+    "subtitle": null
+  },
+  {
+    "id": 2,
+    "title": "Sesli Mesaj 2",
+    "audioPath": "assets/audio/voice_02.aac",
+    "subtitle": null
+  },
+  {
+    "id": 3,
+    "title": "Sesli Mesaj 3",
+    "audioPath": "assets/audio/voice_03.aac",
+    "subtitle": null
+  },
+  {
+    "id": 4,
+    "title": "Sesli Mesaj 4",
+    "audioPath": "assets/audio/voice_04.aac",
+    "subtitle": null
+  }
+]
