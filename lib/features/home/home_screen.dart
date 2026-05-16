@@ -8,6 +8,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/app_date_utils.dart';
 import '../../core/utils/responsive.dart';
 import '../../data/models/app_config.dart';
+import '../../data/models/countdown_event.dart';
 import '../../data/models/daily_note.dart';
 import '../../data/models/memory_item.dart';
 import '../../data/services/local_json_service.dart';
@@ -74,10 +75,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _open(BuildContext context, Widget screen) {
-    Navigator.of(context).push<void>(
+  Future<void> _open(BuildContext context, Widget screen) async {
+    await Navigator.of(context).push<void>(
       MaterialPageRoute(builder: (_) => screen),
     );
+    if (!mounted) return;
+    // CountdownScreen veya benzerinden donulunce sayaclar yenilensin.
+    setState(() {});
+  }
+
+  /// Gelecekteki geri sayimlar, en yakindan uzaga sirali.
+  List<CountdownEvent> get _upcomingCountdowns {
+    final now = DateTime.now();
+    final list = widget.preferences.countdownEvents
+        .where((e) => e.targetDate.isAfter(now))
+        .toList()
+      ..sort((a, b) => a.targetDate.compareTo(b.targetDate));
+    return list;
   }
 
   void _whisperSecret(BuildContext context) {
@@ -245,11 +259,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
+                    if (_upcomingCountdowns.isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                          child: AnimatedFadeSlide(
+                            delay: const Duration(milliseconds: 160),
+                            child: _UpcomingCountdowns(
+                              events: _upcomingCountdowns,
+                              horizontalPadding: hPad,
+                              onTap: () => _open(
+                                context,
+                                CountdownScreen(
+                                  preferences: widget.preferences,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(hPad, 14, hPad, 0),
                         child: AnimatedFadeSlide(
-                          delay: const Duration(milliseconds: 180),
+                          delay: const Duration(milliseconds: 200),
                           child: FutureBuilder<List<DailyNote>>(
                             future: _dailyNotesFuture,
                             builder: (context, snapshot) {
@@ -527,6 +560,108 @@ class _RelationshipBanner extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Yaklasan geri sayimlar — yatay scrollable mini chip'ler.
+class _UpcomingCountdowns extends StatelessWidget {
+  const _UpcomingCountdowns({
+    required this.events,
+    required this.horizontalPadding,
+    required this.onTap,
+  });
+
+  final List<CountdownEvent> events;
+  final double horizontalPadding;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 70,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+        itemCount: events.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, index) {
+          final event = events[index];
+          final days = event.targetDate.difference(DateTime.now()).inDays;
+          final daysLabel = days == 0 ? 'Bugün 💛' : '$days gün';
+          return _CountdownChip(
+            title: event.title,
+            daysLabel: daysLabel,
+            onTap: onTap,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CountdownChip extends StatelessWidget {
+  const _CountdownChip({
+    required this.title,
+    required this.daysLabel,
+    required this.onTap,
+  });
+
+  final String title;
+  final String daysLabel;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white.withOpacity(0.92),
+      borderRadius: BorderRadius.circular(18),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: AppColors.primary.withOpacity(0.28),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: AppColors.shadow,
+                blurRadius: 12,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: AppTextStyles.bodyMuted.copyWith(
+                  fontSize: 10,
+                  color: AppColors.primary,
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.w700,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 3),
+              Text(
+                daysLabel,
+                style: AppTextStyles.titleMedium.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.text,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
