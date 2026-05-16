@@ -499,10 +499,11 @@ class _RelationshipBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sevgilim oldun-dan bu yana',
+                  'Birlikte',
                   style: AppTextStyles.bodyMuted.copyWith(
                     color: Colors.white.withOpacity(0.92),
                     fontSize: 12 * textScale,
+                    letterSpacing: 0.4,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -515,6 +516,14 @@ class _RelationshipBanner extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Text(
+            'iyi ki 🍒',
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: Colors.white.withOpacity(0.85),
+              fontStyle: FontStyle.italic,
+              fontSize: 12 * textScale,
             ),
           ),
         ],
