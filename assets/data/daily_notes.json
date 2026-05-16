@@ -1,7 +1,582 @@
 [
-  { "id": 1, "text": "Bugün biraz yorulmuş olabilirsin ama bilmeni istiyorum, ben seninle gurur duyuyorum." },
-  { "id": 2, "text": "Senin gülüşün bazen bütün günümü düzeltiyor." },
-  { "id": 3, "text": "Bugün de kalbim seninle. Hep seninle." },
-  { "id": 4, "text": "Sabah uyanırken aklımdaki ilk düşünce sendin." },
-  { "id": 5, "text": "Hayatımın en güzel sürprizi sensin." }
+  {
+    "id": 1,
+    "text": "Neşibeşum, bugün biraz yorulmuş olabilirsin ama şemiyşun seninle gerçekten gurur duyuyor."
+  },
+  {
+    "id": 2,
+    "text": "bitanem, küçük bir hatırlatma: bugün de çok seviliyorsun."
+  },
+  {
+    "id": 3,
+    "text": "sevgilim, günün nasıl geçerse geçsin şemiyşunun aklının güzel bir köşesi hep sende."
+  },
+  {
+    "id": 4,
+    "text": "aşkım, bugün kendine biraz nazik davran olur mu?"
+  },
+  {
+    "id": 5,
+    "text": "bebeğim, bunu okuyorsan küçük bir sarılmayı hak ettin."
+  },
+  {
+    "id": 6,
+    "text": "Neşibeşum, bazen sadece iyi olduğunu bilmek bile şemiyşuna yetiyor."
+  },
+  {
+    "id": 7,
+    "text": "bitanem, bugün şemiyşun seni düşündü. Aslında bu artık haber bile değil."
+  },
+  {
+    "id": 8,
+    "text": "sevgilim, umarım bugün seni gülümsetecek minicik bir şey olur."
+  },
+  {
+    "id": 9,
+    "text": "aşkım, bugün kendini eksik hissetsen bile şemiyşunun gözünde çok değerlisin."
+  },
+  {
+    "id": 10,
+    "text": "bebeğim, senin varlığın bazen en sıradan günü bile güzelleştiriyor."
+  },
+  {
+    "id": 11,
+    "text": "Neşibeşum, bugün kendini fazla yorma. Şemiyşun için senin iyi olman daha önemli."
+  },
+  {
+    "id": 12,
+    "text": "bitanem, şemiyşun bugün yine seni özledi. Şaşırmadık."
+  },
+  {
+    "id": 13,
+    "text": "sevgilim, bazen bir mesaj değil direkt sarılma göndermek istiyorum."
+  },
+  {
+    "id": 14,
+    "text": "aşkım, bugün biraz durup nefes almayı unutma."
+  },
+  {
+    "id": 15,
+    "text": "bebeğim, günün yoğun olabilir ama sen hâlâ şemiyşunun en tatlı düşüncesisin."
+  },
+  {
+    "id": 16,
+    "text": "Neşibeşum, sen fark etmeden bile şemiyşunun gününü güzelleştiriyorsun."
+  },
+  {
+    "id": 17,
+    "text": "bitanem, bugünün küçük görevi: kendine kötü davranmamak."
+  },
+  {
+    "id": 18,
+    "text": "sevgilim, şemiyşun seni sevmeyi günün en kolay kısmı ilan etti."
+  },
+  {
+    "id": 19,
+    "text": "aşkım, bugün aynaya bakınca kendine biraz daha iyi davran."
+  },
+  {
+    "id": 20,
+    "text": "bebeğim, çok şey yapmak zorunda değilsin. Sadece iyi olmaya çalışman yeter."
+  },
+  {
+    "id": 21,
+    "text": "Neşibeşum, seni sevmek şemiyşunun en güzel alışkanlığı oldu."
+  },
+  {
+    "id": 22,
+    "text": "bitanem, bazı insanlar iyi gelir ya, sen şemiyşuna tam öylesin."
+  },
+  {
+    "id": 23,
+    "text": "sevgilim, bugün ne olursa olsun akşam olunca kendini suçlama."
+  },
+  {
+    "id": 24,
+    "text": "aşkım, küçük bir not: sen şemiyşunun en sevdiği alışkanlıksın."
+  },
+  {
+    "id": 25,
+    "text": "bebeğim, bugün güzel bir şey olursa şemiyşuna anlatırmış gibi mutlu ol."
+  },
+  {
+    "id": 26,
+    "text": "Neşibeşum, sen gülünce şemiyşunun dünyası biraz daha katlanılır oluyor."
+  },
+  {
+    "id": 27,
+    "text": "bitanem, bazen adını görmek bile şemiyşunun moralini düzeltiyor."
+  },
+  {
+    "id": 28,
+    "text": "sevgilim, bugün kendini yetersiz hissedersen bu mesajı tekrar oku: değilsin."
+  },
+  {
+    "id": 29,
+    "text": "aşkım, şemiyşun senin en sessiz halini bile seviyor."
+  },
+  {
+    "id": 30,
+    "text": "bebeğim, gün içinde bir yerde aklıma geldin ve gülümsedim. Yine."
+  },
+  {
+    "id": 31,
+    "text": "Neşibeşum, şu an yanımda olsaydın şemiyşun büyük ihtimalle seni sinir edip sonra sarılırdı."
+  },
+  {
+    "id": 32,
+    "text": "bitanem, bugün kalbimin bildirim sesi sensin."
+  },
+  {
+    "id": 33,
+    "text": "sevgilim, bazen sana anlatacak bir şeyim yok ama yanında durmak istiyorum."
+  },
+  {
+    "id": 34,
+    "text": "aşkım, seninle sıradan olan şeyler bile özel oluyor."
+  },
+  {
+    "id": 35,
+    "text": "bebeğim, bugün biraz kendini seç olur mu?"
+  },
+  {
+    "id": 36,
+    "text": "Neşibeşum, şemiyşun bazen fotoğraflarımıza bakıp aynı anıya geri dönmek istiyor."
+  },
+  {
+    "id": 37,
+    "text": "bitanem, seninle geçen küçük anlar bile sonradan büyük hatıra oluyor."
+  },
+  {
+    "id": 38,
+    "text": "sevgilim, bugün bir şey ters giderse hemen kendini suçlama."
+  },
+  {
+    "id": 39,
+    "text": "aşkım, şemiyşun seni sadece güzel günlerinde değil, zorlandığın anlarda da seviyor."
+  },
+  {
+    "id": 40,
+    "text": "bebeğim, bugün sana iyi gelen bir şeyi yapmanı istiyorum."
+  },
+  {
+    "id": 41,
+    "text": "Neşibeşum, sen biraz huzur, biraz karmaşa, çokça güzelliksin."
+  },
+  {
+    "id": 42,
+    "text": "bitanem, bu mesaj sana küçük bir öpücük gibi gelsin."
+  },
+  {
+    "id": 43,
+    "text": "sevgilim, bazen sadece iyi ki varsın demek istiyorum."
+  },
+  {
+    "id": 44,
+    "text": "aşkım, bugün çok güçlü olmak zorunda değilsin."
+  },
+  {
+    "id": 45,
+    "text": "bebeğim, yorgunsan dinlen. Şemiyşun seni üretken olduğun için sevmiyor."
+  },
+  {
+    "id": 46,
+    "text": "Neşibeşum, bugün sana kimse güzel bir şey söylemediyse şemiyşun söylüyor: çok değerlisin."
+  },
+  {
+    "id": 47,
+    "text": "bitanem, sen bazen farkında olmadan her şeyi yumuşatıyorsun."
+  },
+  {
+    "id": 48,
+    "text": "sevgilim, hayat bazen dağınık ama sen o dağınıklığın içinde en güzel şeysin."
+  },
+  {
+    "id": 49,
+    "text": "aşkım, bugün küçük şeylere takılırsan kendine kızma. Hepimiz öyleyiz."
+  },
+  {
+    "id": 50,
+    "text": "bebeğim, seninle ilgili en sevdiğim şeylerden biri, yanındayken içimin sakinleşmesi."
+  },
+  {
+    "id": 51,
+    "text": "Neşibeşum, keşke şu an ekran yerine yanımda olsaydın."
+  },
+  {
+    "id": 52,
+    "text": "bitanem, kendini bugün biraz sevmekte zorlanırsan şemiyşunun gözünden bak."
+  },
+  {
+    "id": 53,
+    "text": "sevgilim, seni sevmek çok doğal geliyor; sanki hep böyle olması gerekiyormuş gibi."
+  },
+  {
+    "id": 54,
+    "text": "aşkım, bugün canın sıkılırsa burada sana sakladığım bir sürü küçük şey var."
+  },
+  {
+    "id": 55,
+    "text": "bebeğim, bu uygulama biraz da şemiyşun seni özleyince ne yapacağını bilemediği için var."
+  },
+  {
+    "id": 56,
+    "text": "Neşibeşum, bugün kalbime iyi gelen şeylerden biri yine sensin."
+  },
+  {
+    "id": 57,
+    "text": "bitanem, gülüşünü düşündüm. Günüm daha iyi oldu."
+  },
+  {
+    "id": 58,
+    "text": "sevgilim, seni hatırlatan en küçük şey bile şemiyşuna iyi geliyor."
+  },
+  {
+    "id": 59,
+    "text": "aşkım, bazen bütün günün en güzel cümlesi sadece adın oluyor."
+  },
+  {
+    "id": 60,
+    "text": "bebeğim, bugün şemiyşun senin için küçük ama içten bir mesaj bıraktı: iyi ki varsın."
+  },
+  {
+    "id": 61,
+    "text": "Neşibeşum, kendini yalnız hissettiğin anlarda bile şemiyşun seni gerçekten düşünüyor."
+  },
+  {
+    "id": 62,
+    "text": "bitanem, bugün hiçbir şey mükemmel olmak zorunda değil."
+  },
+  {
+    "id": 63,
+    "text": "sevgilim, seninle ilgili plan yapmayı bile seviyorum."
+  },
+  {
+    "id": 64,
+    "text": "aşkım, bazı günler sadece seni özlemekten ibaret oluyor."
+  },
+  {
+    "id": 65,
+    "text": "bebeğim, bugün biraz gülümsersen şemiyşun kazanmış sayılır."
+  },
+  {
+    "id": 66,
+    "text": "Neşibeşum, iyi hissetmediğinde bile sevilesi olmayı bırakmıyorsun."
+  },
+  {
+    "id": 67,
+    "text": "bitanem, bu mesajı okurken yüzünde küçücük de olsa bir gülümseme olduysa tamamdır."
+  },
+  {
+    "id": 68,
+    "text": "sevgilim, sen şemiyşunun acele etmeden sevdiği en güzel şeysin."
+  },
+  {
+    "id": 69,
+    "text": "aşkım, bazen sana bakarken zaman biraz yavaşlıyor gibi."
+  },
+  {
+    "id": 70,
+    "text": "bebeğim, bugünün sonunda kendine 'elimden geleni yaptım' demeyi unutma."
+  },
+  {
+    "id": 71,
+    "text": "Neşibeşum, senin en doğal halin bile şemiyşun için çok güzel."
+  },
+  {
+    "id": 72,
+    "text": "bitanem, bazen şemiyşuna iyi gelmek için hiçbir şey yapmana gerek yok, var olman yetiyor."
+  },
+  {
+    "id": 73,
+    "text": "sevgilim, bugün içinden hiçbir şey yapmak gelmiyorsa sorun değil."
+  },
+  {
+    "id": 74,
+    "text": "aşkım, seninle konuşmak çoğu şeye iyi geliyor."
+  },
+  {
+    "id": 75,
+    "text": "bebeğim, şu an yanında olamasam da kalbim yine senin tarafında."
+  },
+  {
+    "id": 76,
+    "text": "Neşibeşum, bugün kendini biraz şımart. Şemiyşun izin verdi."
+  },
+  {
+    "id": 77,
+    "text": "bitanem, sen şemiyşunun en güzel 'iyi ki'lerindensin."
+  },
+  {
+    "id": 78,
+    "text": "sevgilim, bazen seni düşündüğümü söylemek yetmiyor ama yine de söylüyorum."
+  },
+  {
+    "id": 79,
+    "text": "aşkım, seninle olan fotoğraflarımıza bakmak şemiyşuna ev gibi geliyor."
+  },
+  {
+    "id": 80,
+    "text": "bebeğim, bir günün kötü geçmesi senin kötü olduğun anlamına gelmez."
+  },
+  {
+    "id": 81,
+    "text": "Neşibeşum, seninle ilgili en ufak detay bile bazen aklıma takılıp kalıyor."
+  },
+  {
+    "id": 82,
+    "text": "bitanem, bugün canın sıkılırsa kendine bir kahve yap ve biraz dur."
+  },
+  {
+    "id": 83,
+    "text": "sevgilim, sen hayatımdaki en güzel beklenmedik şeysin."
+  },
+  {
+    "id": 84,
+    "text": "aşkım, bugün biraz da kendini şemiyşunun sevdiği kadar sevmeyi dene."
+  },
+  {
+    "id": 85,
+    "text": "bebeğim, sana söylemediğim bir şey: bazen sadece seni güldürmek için uğraşıyorum."
+  },
+  {
+    "id": 86,
+    "text": "Neşibeşum, bugün seninle aynı yerde olmayı çok isterdim."
+  },
+  {
+    "id": 87,
+    "text": "bitanem, küçük bir not: saçmalıklarına bile alıştım."
+  },
+  {
+    "id": 88,
+    "text": "sevgilim, sen yanımda yokken bazı anlar eksik kalıyor."
+  },
+  {
+    "id": 89,
+    "text": "aşkım, bugün çok güzel görünmüş olma ihtimalin yüksek. Bilgin olsun."
+  },
+  {
+    "id": 90,
+    "text": "bebeğim, kalbimin favori kişisi yine sensin."
+  },
+  {
+    "id": 91,
+    "text": "Neşibeşum, bazen seninle hiçbir şey yapmadan durmak istiyorum."
+  },
+  {
+    "id": 92,
+    "text": "bitanem, bugün sana sarılamıyorsam bu mesaj sarılma yerine geçsin."
+  },
+  {
+    "id": 93,
+    "text": "sevgilim, sen şemiyşunun içini yumuşatan insansın."
+  },
+  {
+    "id": 94,
+    "text": "aşkım, sen bazen cümlelerin arasındaki en güzel kelime gibisin."
+  },
+  {
+    "id": 95,
+    "text": "bebeğim, kendini bugün yeterli hissetmiyorsan: şemiyşun için fazlasın."
+  },
+  {
+    "id": 96,
+    "text": "Neşibeşum, birazdan bu uygulamayı kapatsan bile şemiyşun seni düşünmeye devam edecek."
+  },
+  {
+    "id": 97,
+    "text": "bitanem, her şey karışık olsa da sana olan sevgim çok net."
+  },
+  {
+    "id": 98,
+    "text": "sevgilim, bugün aklımdan geçen kısa özet: seni seviyorum."
+  },
+  {
+    "id": 99,
+    "text": "aşkım, seninle ilgili en güzel şeylerden biri, yanındayken zamanın iyi geçmesi."
+  },
+  {
+    "id": 100,
+    "text": "bebeğim, eğer bugün gülmediysen bu mesajla minik bir başlangıç yapalım."
+  },
+  {
+    "id": 101,
+    "text": "Neşibeşum, sen bazen en güzel plan, bazen en tatlı plansızlıksın."
+  },
+  {
+    "id": 102,
+    "text": "bitanem, bazı günler seni daha çok seviyorum sanıyorum; sonra ertesi gün yine daha çok."
+  },
+  {
+    "id": 103,
+    "text": "sevgilim, bugün sana iyi davranmayan her şeye karşı şemiyşun senin tarafında."
+  },
+  {
+    "id": 104,
+    "text": "aşkım, en sade halinle bile kalbimi kazanmayı başarıyorsun."
+  },
+  {
+    "id": 105,
+    "text": "bebeğim, senin varlığın bazı cümleleri gereksiz yapıyor; sadece iyi ki varsın."
+  },
+  {
+    "id": 106,
+    "text": "Neşibeşum, seni biraz fazla sevmiş olabilirim. İade yok."
+  },
+  {
+    "id": 107,
+    "text": "bitanem, bugün de şemiyşunun en tatlı sorumluluğusun."
+  },
+  {
+    "id": 108,
+    "text": "sevgilim, bazen triplerini bile seviyorum. Bunu çok kullanma."
+  },
+  {
+    "id": 109,
+    "text": "aşkım, seni sinir etmek bence sevgi dili sayılmalı."
+  },
+  {
+    "id": 110,
+    "text": "bebeğim, şu an çok tatlı olma ihtimalin yüksek."
+  },
+  {
+    "id": 111,
+    "text": "Neşibeşum, eğer bu mesajı okuyorsan muhtemelen yine güzelsin."
+  },
+  {
+    "id": 112,
+    "text": "bitanem, şemiyşun seni seviyor ama bazen gerçekten çok uğraştırıyorsun. Tatlı şekilde."
+  },
+  {
+    "id": 113,
+    "text": "sevgilim, seninle kavga edip 5 dakika sonra özlemek gibi saçma huylarım var."
+  },
+  {
+    "id": 114,
+    "text": "aşkım, uygulamayı kapatsan da şemiyşundan kaçamazsın."
+  },
+  {
+    "id": 115,
+    "text": "bebeğim, bu kadar tatlı olmak yasal mı emin değilim."
+  },
+  {
+    "id": 116,
+    "text": "Neşibeşum, şu an yanında olsam kesin seni hafif sinir ederdim."
+  },
+  {
+    "id": 117,
+    "text": "bitanem, bazı fotoğraflarımızda ben normalim, sen yine fazla güzelsin."
+  },
+  {
+    "id": 118,
+    "text": "sevgilim, senin nazını da seviyorum ama bunu kayıt altına almayalım."
+  },
+  {
+    "id": 119,
+    "text": "aşkım, seni özlemek bazen fazla dramatik oluyor. Şemiyşunluk bir durum."
+  },
+  {
+    "id": 120,
+    "text": "bebeğim, bugün şemiyşunu düşündüysen 10 puan. Düşünmediysen ceza var."
+  },
+  {
+    "id": 121,
+    "text": "Neşibeşum, bu uygulamayı çok kurcalarsan bütün sevgimi bulabilirsin."
+  },
+  {
+    "id": 122,
+    "text": "bitanem, seni sevmek kolay; sana laf yetiştirmek zor."
+  },
+  {
+    "id": 123,
+    "text": "sevgilim, seninle en saçma plan bile güzel oluyor."
+  },
+  {
+    "id": 124,
+    "text": "aşkım, bazen seninle konuşurken konuyu unutuyorum çünkü sana bakıyorum."
+  },
+  {
+    "id": 125,
+    "text": "bebeğim, seni kızdırınca sevimli oluyorsun ama bunu söylememem gerekiyordu."
+  },
+  {
+    "id": 126,
+    "text": "Neşibeşum, içindeki küçük huysuzluğu da seviyorum."
+  },
+  {
+    "id": 127,
+    "text": "bitanem, bazı günler sadece sarılıp susmamız lazım. Konuşursak şemiyşun yine saçmalar."
+  },
+  {
+    "id": 128,
+    "text": "sevgilim, bu mesajı okuduktan sonra gülümsemezsen tekrar oku."
+  },
+  {
+    "id": 129,
+    "text": "aşkım, şemiyşun seni çok seviyor. Evet yine söyledi, alış."
+  },
+  {
+    "id": 130,
+    "text": "bebeğim, muhtemelen bu uygulamada bile favori bölümüm sensin."
+  },
+  {
+    "id": 131,
+    "text": "Neşibeşum, seni düşünürken bazen ciddi kalamıyorum."
+  },
+  {
+    "id": 132,
+    "text": "bitanem, senin yanında normal davranma yeteneğimi kaybediyorum."
+  },
+  {
+    "id": 133,
+    "text": "sevgilim, seni seviyorum ama bazen aşırı tatlı olman sinir bozucu."
+  },
+  {
+    "id": 134,
+    "text": "aşkım, fotoğraflarımıza bakınca çoğu zaman 'biz ne yapıyoruz' diyorum ama güzel."
+  },
+  {
+    "id": 135,
+    "text": "bebeğim, sana sarılma hakkım birikiyor haberin olsun."
+  },
+  {
+    "id": 136,
+    "text": "Neşibeşum, bu uygulama kanıt: şemiyşun romantik olunca da uğraşıyor."
+  },
+  {
+    "id": 137,
+    "text": "bitanem, seni özlemekten mesai yazacağım artık."
+  },
+  {
+    "id": 138,
+    "text": "sevgilim, bazı anlarda sana bakıp sadece içimden 'evet bu' diyorum."
+  },
+  {
+    "id": 139,
+    "text": "aşkım, seni sevme hızım biraz kontrolsüz."
+  },
+  {
+    "id": 140,
+    "text": "bebeğim, dünyanın en tatlı baş belası olabilirsin."
+  },
+  {
+    "id": 141,
+    "text": "Neşibeşum, bugün şemiyşuna trip atmadıysan tebrikler."
+  },
+  {
+    "id": 142,
+    "text": "bitanem, senin gülüşünü görünce savunmam düşüyor."
+  },
+  {
+    "id": 143,
+    "text": "sevgilim, bazen sadece 'gel buraya' demek istiyorum."
+  },
+  {
+    "id": 144,
+    "text": "aşkım, bu kadar güzel fotoğrafın olması şemiyşunun suçu değil."
+  },
+  {
+    "id": 145,
+    "text": "bebeğim, seni sevmek bayağı iyi bir fikir çıktı."
+  }
 ]

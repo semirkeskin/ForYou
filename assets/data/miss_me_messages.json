@@ -1,20 +1,49 @@
 [
   {
     "id": 1,
-    "title": "Beni özlediğinde oku",
-    "message": "Şu an yanında olamasam da kalbimin en güzel yeri sende.",
-    "audio": null
-  },
-  {
-    "id": 2,
-    "title": "Uyumadan önce oku",
-    "message": "Gözlerini kapatmadan önce bilmeni istiyorum: seni çok seviyorum.",
-    "audio": null
-  },
-  {
-    "id": 3,
-    "title": "Sarılmaya ihtiyacın varsa oku",
-    "message": "Sarılma ihtiyacın olduğunda gözlerini kapat ve beni hayal et. Ben buradayım.",
+    "title": "Sana söylemediğim şeyler",
+    "messages": [
+      "Neşibeşum, bazen sana bakarken içimden 'umarım bunu hiç kaybetmem' diyorum.",
+      "bitanem, bazı fotoğraflarımıza senden habersiz uzun uzun bakıyorum.",
+      "sevgilim, sen güldüğünde şemiyşunun içi rahatlıyor.",
+      "aşkım, bazen seni özlediğimi söylemiyorum çünkü çok belli etmek istemiyorum.",
+      "bebeğim, senin mutlu olman gerçekten benim moralimi değiştiriyor.",
+      "Neşibeşum, bazen sana kızsam bile içimden sarılmak geçiyor.",
+      "bitanem, yanında çocuk gibi olmaktan utanmıyorum.",
+      "sevgilim, bazı günler sırf sen iyi misin diye merak ediyorum.",
+      "aşkım, seninle ilgili küçük detayları sandığından çok fark ediyorum.",
+      "bebeğim, bazen seni uzaktan izlemek bile bana iyi geliyor.",
+      "Neşibeşum, bazı anlarımızı tekrar yaşamak istiyorum ama sana söylemiyorum.",
+      "bitanem, seninle olan fotoğraflarımı silmeye kıyamam.",
+      "sevgilim, bazen yanımda olmasan bile sana bir şey anlatır gibi düşünüyorum.",
+      "aşkım, senin canın sıkılınca şemiyşunun da içi sıkılıyor.",
+      "bebeğim, bazen seni korumak istiyorum ama bunu abartılı söylemek istemiyorum.",
+      "Neşibeşum, senin gözlerinin dolması bende kötü bir his bırakıyor.",
+      "bitanem, birlikte gülüşümüzü seviyorum.",
+      "sevgilim, bazen 'iyi ki o gün karşıma çıktı' diye düşünüyorum.",
+      "aşkım, sana bazen olduğumdan daha güçlü görünmeye çalışıyorum.",
+      "bebeğim, senin yanında yumuşuyorum.",
+      "Neşibeşum, bazı küçük anlarımız bana büyük geliyor.",
+      "bitanem, seninle ilgili plan yapmak beni mutlu ediyor.",
+      "sevgilim, bazen sadece sesini duymak istiyorum.",
+      "aşkım, seninle tartışsak bile sonunda yine sana gelmek istiyorum.",
+      "bebeğim, bazen sana yazmak için bahane arıyorum.",
+      "Neşibeşum, seni üzgün görünce ne yapacağımı bilemediğim oluyor.",
+      "bitanem, fotoğraflarımızda en çok senin doğal hallerini seviyorum.",
+      "sevgilim, bazen seni izlerken fark edilmek istemiyorum.",
+      "aşkım, senin basit bir 'iyi misin?' demen bile iyi geliyor.",
+      "bebeğim, bazı anlarda yanımda olmanı o kadar istiyorum ki söyleyemiyorum.",
+      "Neşibeşum, senin en küçük hareketlerin bile bende yer ediyor.",
+      "bitanem, bazen seni düşündüğümde gülümsemem dışarıdan belli oluyor.",
+      "sevgilim, şemiyşun seni sadece sevmedi, sana alıştı da.",
+      "aşkım, bu biraz tehlikeli ama sen benim zayıf noktalarımdan birisin.",
+      "bebeğim, bazı şarkılarda seni buluyorum.",
+      "Neşibeşum, bazen seninle kurduğumuz cümleleri tekrar düşünüyorum.",
+      "bitanem, en güzel anılarımın çoğunda senin yüzün var.",
+      "sevgilim, senin rahat hissetmen benim için önemli.",
+      "aşkım, bazen seni daha iyi sevebilmek için kendimi de düzeltmek istiyorum.",
+      "bebeğim, sen şemiyşunda güzel bir yer açtın."
+    ],
     "audio": null
   }
 ]

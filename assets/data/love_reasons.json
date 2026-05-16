@@ -1,7 +1,434 @@
 [
-  { "id": 1, "text": "Çünkü en basit anları bile güzel hale getiriyorsun." },
-  { "id": 2, "text": "Çünkü yanında kendim gibi hissediyorum." },
-  { "id": 3, "text": "Çünkü gözlerin bana ev gibi hissettiriyor." },
-  { "id": 4, "text": "Çünkü sessizliğin bile bana huzur veriyor." },
-  { "id": 5, "text": "Çünkü en yorgun halini bile özlüyorum." }
+  {
+    "id": 1,
+    "text": "Çünkü Neşibeşum, yanında şemiyşun kendisi gibi hissediyor."
+  },
+  {
+    "id": 2,
+    "text": "Çünkü bitanem, gülüşün bazen bütün günümü toparlıyor."
+  },
+  {
+    "id": 3,
+    "text": "Çünkü sevgilim, en sıradan anları bile güzel bir anıya çeviriyorsun."
+  },
+  {
+    "id": 4,
+    "text": "Çünkü aşkım, sessizlikte bile yanında sıkılmıyorum."
+  },
+  {
+    "id": 5,
+    "text": "Çünkü bebeğim, şemiyşuna iyi geliyorsun ve bunu bazen hiçbir şey yapmadan başarıyorsun."
+  },
+  {
+    "id": 6,
+    "text": "Çünkü seninle konuşmak çoğu şeyi hafifletiyor."
+  },
+  {
+    "id": 7,
+    "text": "Çünkü yüzüne bakınca içim yumuşuyor."
+  },
+  {
+    "id": 8,
+    "text": "Çünkü saçma şeylere birlikte gülebiliyoruz."
+  },
+  {
+    "id": 9,
+    "text": "Çünkü bazen sadece varlığın bile yetiyor."
+  },
+  {
+    "id": 10,
+    "text": "Çünkü senin mutluluğun şemiyşunu gerçekten mutlu ediyor."
+  },
+  {
+    "id": 11,
+    "text": "Çünkü yanında zaman daha hızlı ama daha güzel geçiyor."
+  },
+  {
+    "id": 12,
+    "text": "Çünkü en doğal halinle bile çok güzelsin."
+  },
+  {
+    "id": 13,
+    "text": "Çünkü küçük şeyleri önemsemeni seviyorum."
+  },
+  {
+    "id": 14,
+    "text": "Çünkü bana baktığında bazen her şey duruyor gibi oluyor."
+  },
+  {
+    "id": 15,
+    "text": "Çünkü seninle fotoğraf çekilmek bile güzel bir hatıra oluyor."
+  },
+  {
+    "id": 16,
+    "text": "Çünkü birlikte hiçbir şey yapmamak bile güzel."
+  },
+  {
+    "id": 17,
+    "text": "Çünkü kızsan bile uzun süre kızamıyorum."
+  },
+  {
+    "id": 18,
+    "text": "Çünkü şemiyşunu bazen çocuk gibi mutlu ediyorsun."
+  },
+  {
+    "id": 19,
+    "text": "Çünkü senin yanında kendimi saklamam gerekmiyor."
+  },
+  {
+    "id": 20,
+    "text": "Çünkü iyi günlerimi güzelleştirip kötü günlerimi hafifletiyorsun."
+  },
+  {
+    "id": 21,
+    "text": "Çünkü gülünce gözlerin de gülüyor."
+  },
+  {
+    "id": 22,
+    "text": "Çünkü seni izlemeyi seviyorum; fark etmediğin anlarda bile."
+  },
+  {
+    "id": 23,
+    "text": "Çünkü bazen sadece adını görmek bile yetiyor."
+  },
+  {
+    "id": 24,
+    "text": "Çünkü kalbimde çok sakin bir yerin var."
+  },
+  {
+    "id": 25,
+    "text": "Çünkü sen şemiyşunun en sevdiği alışkanlıklardan biri oldun."
+  },
+  {
+    "id": 26,
+    "text": "Çünkü beraber geçirdiğimiz en basit günler bile sonradan özleniyor."
+  },
+  {
+    "id": 27,
+    "text": "Çünkü bana ev gibi hissettiriyorsun."
+  },
+  {
+    "id": 28,
+    "text": "Çünkü seninle gelecek düşünmek güzel geliyor."
+  },
+  {
+    "id": 29,
+    "text": "Çünkü kırılgan halini de seviyorum."
+  },
+  {
+    "id": 30,
+    "text": "Çünkü güçlü görünmeye çalışırken bile çok tatlısın."
+  },
+  {
+    "id": 31,
+    "text": "Çünkü bana bazı şeyleri daha güzel görmeyi öğrettin."
+  },
+  {
+    "id": 32,
+    "text": "Çünkü en küçük detaylarını bile fark etmek hoşuma gidiyor."
+  },
+  {
+    "id": 33,
+    "text": "Çünkü seninle yürümek bile bana iyi geliyor."
+  },
+  {
+    "id": 34,
+    "text": "Çünkü bazen aynı şeye bakıp aynı anda gülebiliyoruz."
+  },
+  {
+    "id": 35,
+    "text": "Çünkü sesin şemiyşuna iyi geliyor."
+  },
+  {
+    "id": 36,
+    "text": "Çünkü varlığın içimde güzel bir yer açıyor."
+  },
+  {
+    "id": 37,
+    "text": "Çünkü seni düşündüğümde istemsizce gülümsüyorum."
+  },
+  {
+    "id": 38,
+    "text": "Çünkü bende hep biraz daha kalmak isteme hissi uyandırıyorsun."
+  },
+  {
+    "id": 39,
+    "text": "Çünkü bazen bütün karmaşanın içinde en net şey sensin."
+  },
+  {
+    "id": 40,
+    "text": "Çünkü seni sevmek zor değil, çok doğal."
+  },
+  {
+    "id": 41,
+    "text": "Çünkü senin yanında bazı korkularım küçülüyor."
+  },
+  {
+    "id": 42,
+    "text": "Çünkü bana değerli hissettirdiğin anlar var."
+  },
+  {
+    "id": 43,
+    "text": "Çünkü seni sevdiğimi söylemekten sıkılmıyorum."
+  },
+  {
+    "id": 44,
+    "text": "Çünkü saçmalıkların bile bana tatlı geliyor."
+  },
+  {
+    "id": 45,
+    "text": "Çünkü bazen triplerin bile sevimli oluyor. Bazen dedim."
+  },
+  {
+    "id": 46,
+    "text": "Çünkü yanında ciddi kalmak çok zor."
+  },
+  {
+    "id": 47,
+    "text": "Çünkü fotoğraflarımızı açınca hepsinin arkasında seninle ilgili bir his var."
+  },
+  {
+    "id": 48,
+    "text": "Çünkü bana iyi ki dedirtiyorsun."
+  },
+  {
+    "id": 49,
+    "text": "Çünkü yanımda olmasan bile günümde varsın."
+  },
+  {
+    "id": 50,
+    "text": "Çünkü en yorgun halimde bile aklıma gelince içim yumuşuyor."
+  },
+  {
+    "id": 51,
+    "text": "Çünkü her defasında seni daha farklı bir yerinden seviyorum."
+  },
+  {
+    "id": 52,
+    "text": "Çünkü seninle anı biriktirmeyi seviyorum."
+  },
+  {
+    "id": 53,
+    "text": "Çünkü senin en küçük heyecanların bile bana tatlı geliyor."
+  },
+  {
+    "id": 54,
+    "text": "Çünkü bazen sadece elini tutmak yetiyor."
+  },
+  {
+    "id": 55,
+    "text": "Çünkü yanında uzun uzun susabilirim."
+  },
+  {
+    "id": 56,
+    "text": "Çünkü beni olduğum gibi görüyorsun."
+  },
+  {
+    "id": 57,
+    "text": "Çünkü seninle geçen zaman kayıp gibi değil, kazanılmış gibi."
+  },
+  {
+    "id": 58,
+    "text": "Çünkü bana bazen iyi bir insan olmak istetiyorsun."
+  },
+  {
+    "id": 59,
+    "text": "Çünkü seni mutlu etmek hoşuma gidiyor."
+  },
+  {
+    "id": 60,
+    "text": "Çünkü benimle gülüş şeklin özel gibi geliyor."
+  },
+  {
+    "id": 61,
+    "text": "Çünkü senin bakışlarını seviyorum."
+  },
+  {
+    "id": 62,
+    "text": "Çünkü küçük çocuk gibi sevindiğin anları seviyorum."
+  },
+  {
+    "id": 63,
+    "text": "Çünkü canın sıkıldığında bile çok gerçeksin."
+  },
+  {
+    "id": 64,
+    "text": "Çünkü senin yanında abartısız mutluyum."
+  },
+  {
+    "id": 65,
+    "text": "Çünkü bana huzur veriyorsun."
+  },
+  {
+    "id": 66,
+    "text": "Çünkü seninle ilgili her şey kusursuz değil ama gerçek."
+  },
+  {
+    "id": 67,
+    "text": "Çünkü en güzel fotoğraflarımın çoğunda sen varsın."
+  },
+  {
+    "id": 68,
+    "text": "Çünkü yanındayken zamanın nasıl geçtiğini anlamıyorum."
+  },
+  {
+    "id": 69,
+    "text": "Çünkü seni özlemek bile bazen güzel geliyor."
+  },
+  {
+    "id": 70,
+    "text": "Çünkü seninle olan anılarım içimi ısıtıyor."
+  },
+  {
+    "id": 71,
+    "text": "Çünkü bazen bana bakışınla bütün cümleyi tamamlıyorsun."
+  },
+  {
+    "id": 72,
+    "text": "Çünkü senin kalbin güzel."
+  },
+  {
+    "id": 73,
+    "text": "Çünkü nazın bile bana tanıdık geliyor."
+  },
+  {
+    "id": 74,
+    "text": "Çünkü bazen beni çok iyi anlıyorsun."
+  },
+  {
+    "id": 75,
+    "text": "Çünkü anlamasan bile dinlemeye çalışıyorsun."
+  },
+  {
+    "id": 76,
+    "text": "Çünkü birlikte güldüğümüz şeyler bize ait gibi."
+  },
+  {
+    "id": 77,
+    "text": "Çünkü sen şemiyşunun en sevdiği 'şu an keşke burada olsa' kişisisin."
+  },
+  {
+    "id": 78,
+    "text": "Çünkü her fotoğrafta başka bir güzelliğini görüyorum."
+  },
+  {
+    "id": 79,
+    "text": "Çünkü yanında dünyaya biraz daha az sinir oluyorum."
+  },
+  {
+    "id": 80,
+    "text": "Çünkü sabah aklıma geliyorsun, gece de."
+  },
+  {
+    "id": 81,
+    "text": "Çünkü seninle küçük planlar yapmak bile heyecanlandırıyor."
+  },
+  {
+    "id": 82,
+    "text": "Çünkü sen şemiyşunun en güzel beklenmedik şeyisin."
+  },
+  {
+    "id": 83,
+    "text": "Çünkü yorgunken bile sana sarılmak isterim."
+  },
+  {
+    "id": 84,
+    "text": "Çünkü bazı günler tek iyi şey sen oluyorsun."
+  },
+  {
+    "id": 85,
+    "text": "Çünkü gülüşünü kaydetmek istiyorum bazen."
+  },
+  {
+    "id": 86,
+    "text": "Çünkü seni üzgün görünce içim sıkışıyor."
+  },
+  {
+    "id": 87,
+    "text": "Çünkü iyi hissetmen benim için önemli."
+  },
+  {
+    "id": 88,
+    "text": "Çünkü en tatlı hallerin çoğu sen farkında değilken oluyor."
+  },
+  {
+    "id": 89,
+    "text": "Çünkü bana bazen dünyayı unutturuyorsun."
+  },
+  {
+    "id": 90,
+    "text": "Çünkü seninle aynı yerde olmak bile güzel."
+  },
+  {
+    "id": 91,
+    "text": "Çünkü bende bıraktığın his çok güzel."
+  },
+  {
+    "id": 92,
+    "text": "Çünkü senden sonra bazı şeyler eskisi gibi değil."
+  },
+  {
+    "id": 93,
+    "text": "Çünkü bana sevginin küçük detaylarda olduğunu gösteriyorsun."
+  },
+  {
+    "id": 94,
+    "text": "Çünkü bazen seni görünce bütün yorgunluğum değişiyor."
+  },
+  {
+    "id": 95,
+    "text": "Çünkü seninle dalga geçmeyi de, seni ciddiye almayı da seviyorum."
+  },
+  {
+    "id": 96,
+    "text": "Çünkü ne kadar kızsam da sonunda yine seni seviyorum."
+  },
+  {
+    "id": 97,
+    "text": "Çünkü bana kendimi seçilmiş gibi hissettirdiğin anlar var."
+  },
+  {
+    "id": 98,
+    "text": "Çünkü seninle birlikteyken hayat biraz daha renkli."
+  },
+  {
+    "id": 99,
+    "text": "Çünkü gözlerin bazı şeyleri kelimeden önce söylüyor."
+  },
+  {
+    "id": 100,
+    "text": "Çünkü yanımda olmadığında bile yerin belli oluyor."
+  },
+  {
+    "id": 101,
+    "text": "Çünkü senin kokunu özlemek diye bir şey var."
+  },
+  {
+    "id": 102,
+    "text": "Çünkü bana anlatacağın küçük şeyleri bile merak ediyorum."
+  },
+  {
+    "id": 103,
+    "text": "Çünkü senin gününün nasıl geçtiğini gerçekten bilmek istiyorum."
+  },
+  {
+    "id": 104,
+    "text": "Çünkü seni sevmek planlı bir şey değil; oldu ve çok güzel oldu."
+  },
+  {
+    "id": 105,
+    "text": "Çünkü en saçma fotoğraflarımız bile kıymetli."
+  },
+  {
+    "id": 106,
+    "text": "Çünkü bazen seni kızdırmak aşırı eğlenceli. Sonra hemen barışmak şartıyla."
+  },
+  {
+    "id": 107,
+    "text": "Çünkü bana 'biz' kelimesini güzel hissettirdin."
+  },
+  {
+    "id": 108,
+    "text": "Çünkü sen şemiyşunun favori insanısın."
+  }
 ]

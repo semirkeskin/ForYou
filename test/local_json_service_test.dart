@@ -80,13 +80,23 @@ void main() {
   });
 
   group('LocalJsonService.loadMissMeMessages', () {
-    test('audio alani null olabilir', () async {
+    test('audio alani null olabilir ve messages parse edilir', () async {
       mockAsset(
         'assets/data/miss_me_messages.json',
-        '[{"id":1,"title":"t","message":"m","audio":null}]',
+        '[{"id":1,"title":"t","messages":["a","b"],"audio":null}]',
       );
       final list = await service.loadMissMeMessages();
       expect(list.first.audio, isNull);
+      expect(list.first.messages, ['a', 'b']);
+    });
+
+    test('eski message alanı (string) geriye uyumlu', () async {
+      mockAsset(
+        'assets/data/miss_me_messages.json',
+        '[{"id":1,"title":"t","message":"tek mesaj","audio":null}]',
+      );
+      final list = await service.loadMissMeMessages();
+      expect(list.first.messages, ['tek mesaj']);
     });
   });
 }
