@@ -12,6 +12,7 @@ class MemoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasText = memory.title != null || memory.date != null;
     return Material(
       color: AppColors.card,
       borderRadius: BorderRadius.circular(24),
@@ -32,11 +33,10 @@ class MemoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              AspectRatio(
-                aspectRatio: 4 / 3,
-                child: _MemoryImage(path: memory.image),
-              ),
-              if (memory.title != null || memory.date != null)
+              // Yazi yoksa foto tum karti doldurur (Expanded). Yazi varsa
+              // alttan yazi bloku icin yer birakir.
+              Expanded(child: _MemoryImage(path: memory.image)),
+              if (hasText)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
                   child: Column(
