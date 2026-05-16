@@ -1,9 +1,107 @@
 [
   {
     "id": 1,
-    "title": "Örnek Şarkı",
-    "artist": "Sanatçı Adı",
-    "reason": "Bu şarkıyı ilk birlikte dinlediğimizde çok özeldi.",
-    "link": ""
+    "title": "You’re The One",
+    "artist": "The Vogues",
+    "reason": "Bizim şarkımız",
+    "link": "https://music.youtube.com/watch?v=zoQk_Dqg4WA"
+  },
+  {
+    "id": 2,
+    "title": "Dünyanın En Güzel Kızı",
+    "artist": "Mavi Gri",
+    "reason": "Dünyanın en güzeli olan sevgilime",
+    "link": "https://music.youtube.com/watch?v=Zc8iMeQczZs"
+  },
+  {
+    "id": 3,
+    "title": "Aşık Oldum Ben Sana",
+    "artist": "Maran Marangöz",
+    "reason": "Aşık oldum ben sanaa",
+    "link": "https://music.youtube.com/watch?v=gfHu2lZFhH8"
+  },
+  {
+    "id": 4,
+    "title": "Senden Daha Güzel",
+    "artist": "Duman",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=MDWUyOcmN3c"
+  },
+  {
+    "id": 5,
+    "title": "Sıcak Şarap",
+    "artist": "Batuhan Kordel",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=XogGwSX4DWY"
+  },
+  {
+    "id": 6,
+    "title": "Bu Kız",
+    "artist": "Son Feci Bisiklet",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=V9ghT5c6V38"
+  },
+  {
+    "id": 7,
+    "title": "Teni Tenime",
+    "artist": "Sena Sener",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=ZVzuNANF4mo"
+  },
+  {
+    "id": 8,
+    "title": "Nefes Bile Almadan",
+    "artist": "Redd",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=GeHT8bylNlc"
+  },
+  {
+    "id": 9,
+    "title": "Benimki",
+    "artist": "Yalın",
+    "reason": "Benimkiii",
+    "link": "https://music.youtube.com/watch?v=lX4VonLlY0o"
+  },
+  {
+    "id": 10,
+    "title": "Cumhuriyet",
+    "artist": "Yalın",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=0tkZXRgQraA"
+  },
+  {
+    "id": 11,
+    "title": "Ki Sen",
+    "artist": "Yalin",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=K6Km8OavCmw"
+  },
+  {
+    "id": 12,
+    "title": "Sen Benim Başıma Gelen En Güzel Şey",
+    "artist": "Koyu",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=YqYoLnxHWFA"
+  },
+  {
+    "id": 13,
+    "title": "Aşk",
+    "artist": "Gökhan Türkmen",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=JT6ScT6A-qk"
+  },
+  {
+    "id": 14,
+    "title": "Ey Aşk",
+    "artist": "Sezen Aksu",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=fOjj61Iauig"
+  },
+  {
+    "id": 15,
+    "title": "Al Beni Bas Yaralarına",
+    "artist": "İkiye On Kala",
+    "reason": "",
+    "link": "https://music.youtube.com/watch?v=G9HCknL0_lw"
   }
 ]
