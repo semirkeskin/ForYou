@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/responsive.dart';
 import 'data/models/app_config.dart';
+import 'data/models/special_hour_message.dart';
 import 'data/services/preferences_service.dart';
+import 'features/_shared/special_hour_listener.dart';
 import 'features/home/home_screen.dart';
 import 'features/intro/intro_screen.dart';
 
@@ -12,10 +14,12 @@ class SanaSakladiklarimApp extends StatelessWidget {
     super.key,
     required this.preferences,
     required this.config,
+    required this.specialHour,
   });
 
   final PreferencesService preferences;
   final AppConfig config;
+  final SpecialHourMessage specialHour;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,10 @@ class SanaSakladiklarimApp extends StatelessWidget {
         );
         return MediaQuery(
           data: mq.copyWith(textScaler: scaler),
-          child: child ?? const SizedBox.shrink(),
+          child: SpecialHourListener(
+            message: specialHour,
+            child: child ?? const SizedBox.shrink(),
+          ),
         );
       },
       home: preferences.introSeen

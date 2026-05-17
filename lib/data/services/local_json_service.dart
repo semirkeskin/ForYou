@@ -8,6 +8,7 @@ import '../models/daily_note.dart';
 import '../models/love_reason.dart';
 import '../models/memory_item.dart';
 import '../models/song_item.dart';
+import '../models/special_hour_message.dart';
 import '../models/surprise_box.dart';
 import '../models/voice_message.dart';
 
@@ -42,6 +43,16 @@ class LocalJsonService {
 
   Future<List<VoiceMessage>> loadVoiceMessages() async {
     return _loadList(AssetPaths.voiceMessages, VoiceMessage.fromJson);
+  }
+
+  Future<SpecialHourMessage> loadSpecialHourMessage() async {
+    try {
+      final raw = await _loadString(AssetPaths.specialHours);
+      final map = jsonDecode(raw) as Map<String, dynamic>;
+      return SpecialHourMessage.fromJson(map);
+    } on Exception {
+      return SpecialHourMessage.empty;
+    }
   }
 
   Future<String> _loadString(String path) async {

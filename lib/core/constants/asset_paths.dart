@@ -10,4 +10,5 @@ class AssetPaths {
   static const String surpriseBoxes = '${dataDir}surprise_boxes.json';
   static const String songs = '${dataDir}songs.json';
   static const String voiceMessages = '${dataDir}voice_messages.json';
+  static const String specialHours = '${dataDir}special_hours.json';
 }
