@@ -36,6 +36,43 @@ jobs:
             flutter create --project-name sana_sakladiklarim --platforms=android .
           fi
 
+      # Sabit keystore — her build ayni anahtarla imzalar, boylece sevgili
+      # tablete her yeni APK 'guncelleme' olarak kurulur. Keystore GitHub
+      # Actions cache'inde saklanir; ilk build'de uretilir, sonraki build'ler
+      # cache'ten alir.
+      - name: Restore signing keystore from cache
+        id: keystore-cache
+        uses: actions/cache@v4
+        with:
+          path: android/app/kiraz.jks
+          key: kiraz-keystore-v1
+
+      - name: Generate keystore (only first build)
+        if: steps.keystore-cache.outputs.cache-hit != 'true'
+        run: |
+          keytool -genkeypair -v \
+            -keystore android/app/kiraz.jks \
+            -keyalg RSA -keysize 2048 -validity 36500 \
+            -alias kiraz \
+            -storepass kirazkiraz -keypass kirazkiraz \
+            -dname "CN=Kiraz, O=Kiraz, L=Istanbul, C=TR"
+
+      - name: Save keystore to cache (first build only)
+        if: steps.keystore-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: android/app/kiraz.jks
+          key: kiraz-keystore-v1
+
+      - name: Create key.properties
+        run: |
+          cat > android/key.properties <<EOF
+          storePassword=kirazkiraz
+          keyPassword=kirazkiraz
+          keyAlias=kiraz
+          storeFile=kiraz.jks
+          EOF
+
       - name: Install dependencies
         run: flutter pub get
 

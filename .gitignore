@@ -29,6 +29,7 @@ android/app/profile/
 android/captures/
 *.jks
 *.keystore
+android/key.properties
 
 # iOS / macOS / web (Yol 1 icin uretilmeyebilir ama korumaya alalim)
 ios/Pods/

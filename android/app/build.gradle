@@ -5,6 +5,15 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+// Release imza konfigurasyonu — varsa android/key.properties'i oku, yoksa
+// debug-signing'e fallback. Bu sayede GitHub Actions key.properties uretip
+// sabit keystore ile imzalar, lokal calismada da debug-signing ile devam eder.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.semir.sanasakladiklarim.sana_sakladiklarim"
     compileSdk = flutter.compileSdkVersion
@@ -20,21 +29,29 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.semir.sanasakladiklarim.sana_sakladiklarim"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        release {
+            if (keystoreProperties['storeFile']) {
+                keyAlias = keystoreProperties['keyAlias']
+                keyPassword = keystoreProperties['keyPassword']
+                storeFile = file(keystoreProperties['storeFile'])
+                storePassword = keystoreProperties['storePassword']
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            signingConfig = keystoreProperties['storeFile']
+                ? signingConfigs.release
+                : signingConfigs.debug
         }
     }
 }
