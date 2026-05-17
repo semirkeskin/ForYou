@@ -11,4 +11,5 @@ class AssetPaths {
   static const String songs = '${dataDir}songs.json';
   static const String voiceMessages = '${dataDir}voice_messages.json';
   static const String specialHours = '${dataDir}special_hours.json';
+  static const String lovePings = '${dataDir}love_pings.json';
 }

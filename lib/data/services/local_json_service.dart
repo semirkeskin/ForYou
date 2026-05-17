@@ -6,6 +6,7 @@ import '../../core/constants/asset_paths.dart';
 import '../models/app_config.dart';
 import '../models/daily_note.dart';
 import '../models/love_reason.dart';
+import '../models/love_ping.dart';
 import '../models/memory_item.dart';
 import '../models/song_item.dart';
 import '../models/special_hour_message.dart';
@@ -52,6 +53,14 @@ class LocalJsonService {
       return SpecialHourMessage.fromJson(map);
     } on Exception {
       return SpecialHourMessage.empty;
+    }
+  }
+
+  Future<List<LovePing>> loadLovePings() async {
+    try {
+      return _loadList(AssetPaths.lovePings, LovePing.fromJson);
+    } on Exception {
+      return const [];
     }
   }
 

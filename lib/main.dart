@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'app.dart';
 import 'data/models/app_config.dart';
+import 'data/models/love_ping.dart';
 import 'data/models/special_hour_message.dart';
 import 'data/services/local_json_service.dart';
 import 'data/services/notification_service.dart';
@@ -21,10 +22,15 @@ Future<void> main() async {
   final AppConfig config = await _loadConfigSafely(service);
   final SpecialHourMessage specialHour =
       await _loadSpecialHourSafely(service);
+  final List<LovePing> lovePings = await _loadLovePingsSafely(service);
 
-  // Bildirim altyapisi (10:10, 11:11, ..., 02:02 → 17 saat icin)
+  // Bildirim altyapisi: special hours (10:10, 11:11, ...) + love pings (gunluk
+  // belli saatlerde "seni ozledim/sevdim" mesajlari)
   await NotificationService.init();
-  await NotificationService.scheduleAllSpecialHours(specialHour);
+  await NotificationService.scheduleAll(
+    specialHour: specialHour,
+    lovePings: lovePings,
+  );
 
   runApp(SanaSakladiklarimApp(
     preferences: preferences,
@@ -50,5 +56,14 @@ Future<SpecialHourMessage> _loadSpecialHourSafely(
     return await service.loadSpecialHourMessage();
   } on Exception {
     return SpecialHourMessage.empty;
+  }
+}
+
+Future<List<LovePing>> _loadLovePingsSafely(
+    LocalJsonService service) async {
+  try {
+    return await service.loadLovePings();
+  } on Exception {
+    return const [];
   }
 }
